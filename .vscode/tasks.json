@@ -20,6 +20,14 @@
 			"label": "npm: serve",
 			"detail": "npx @11ty/eleventy --serve",
 			"isBackground": true
+		},
+		{
+			"type": "npm",
+			"script": "clean",
+			"group": "test",
+			"problemMatcher": [],
+			"label": "npm: clean",
+			"detail": "rm --recursive --force _site"
 		}
 	]
 }
