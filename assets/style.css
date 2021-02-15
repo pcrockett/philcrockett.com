@@ -1,0 +1,163 @@
+@font-face {
+    font-family: "Fira Sans";
+    src: url("fonts/Fira_Sans/FiraSans-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Merriweather";
+    src: url("fonts/Merriweather/Merriweather-Regular.ttf");
+}
+
+body {
+    font-family: "Merriweather",Georgia,Times,Times New Roman,serif;
+    font-size: 1.2em;
+    line-height: 1.6em;
+    color: #333;
+    background-color: #fafafa;
+    margin: 0;
+}
+
+#content {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 2em;
+    max-width: 40em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Fira Sans",Trebuchet MS,Helvetica,Arial,sans-serif;
+    line-height: 1em; /* Fix wrapping of headers on narrow screens */
+}
+
+header {
+    font-family: "Fira Sans",Trebuchet MS,Helvetica,Arial,sans-serif;
+}
+
+#home-header {
+    text-align: center;
+}
+
+#site-header {
+    font-size: 1.2em;
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    padding: 0.6em;
+    width: 100%;
+    background-color: #ddd;
+}
+
+#site-header nav {
+    display: inline-block;
+}
+
+#site-header nav > a {
+    margin-left: 0.8em;
+}
+
+header a {
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: #0e00d7;
+}
+
+a:hover {
+    text-shadow: 0 0 1px;
+}
+
+.flex-empty-space {
+    flex-grow: 1;
+}
+
+#home-center {
+    font-family: "Fira Sans",Trebuchet MS,Helvetica,Arial,sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    max-width: 25em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#home-title {
+    margin: 0;
+}
+
+#home-icons {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+}
+
+#home-icons a {
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+    color: #333;
+}
+
+#home-icons svg {
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+}
+
+#home-nav {
+    font-size: 1.4em;
+    line-height: 1.8em;
+}
+
+#home-nav a {
+    display: block;
+    text-align: center;
+}
+
+footer {
+    font-family: "Fira Sans",Trebuchet MS,Helvetica,Arial,sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.stay-above-header {
+    margin-bottom: 3.1em;
+}
+
+@media print {
+    body {
+        font-size: 1em;
+        line-height: 1.2em;
+        background-color: #fff;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: #ccc;
+        background-color: #333;
+    }
+
+    a {
+        color: #9189ff
+    }
+
+    #home-icons a {
+        color: #ccc;
+    }
+
+    #site-header {
+        background-color: #444;
+    }
+
+    header a {
+        color: #ccc;
+    }
+}
