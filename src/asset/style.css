@@ -1,0 +1,95 @@
+@font-face {
+    font-family: "Fira Sans";
+    src: url("font/Fira_Sans/FiraSans-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Merriweather";
+    src: url("font/Merriweather/Merriweather-Regular.ttf");
+}
+
+body {
+    font-family: "Merriweather", serif;
+    font-size: 1.2em;
+    line-height: 1.4em;
+    color: #333;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 3em;
+    max-width: 40em;
+    background-color: #fafafa;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Fira Sans", sans-serif;
+    line-height: 1em; /* Fix wrapping of headers on narrow screens */
+}
+
+header {
+    text-align: center;
+    font-family: "Fira Sans", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #0e00d7;
+}
+
+#home-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    max-width: 25em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#home-title {
+    margin: 0;
+}
+
+#home-icons {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+}
+
+#home-icons a {
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+    color: #333;
+}
+
+#home-icons svg {
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+}
+
+@media print {
+    body {
+        font-size: 1em;
+        line-height: 1.2em;
+        background-color: #fff;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: #ccc;
+        background-color: #333;
+    }
+
+    a {
+        color: #9189ff
+    }
+
+    #home-icons a {
+        color: #ccc;
+    }
+}

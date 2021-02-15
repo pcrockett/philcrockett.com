@@ -1,0 +1,13 @@
+---
+layout: base.liquid
+---
+
+{% if title %}
+<header>
+    <h1>{{ title }}</h1>
+    {% if subtitle %}
+    <p class="subtitle"><em>{{ subtitle }}</em></p>
+    {% endif %}
+</header>
+{% endif %}
+{{ content }}
