@@ -1,6 +1,5 @@
 ---
 layout: base.liquid
-title: Philip Crockett
 ---
 
 <div id="home-center">
@@ -8,7 +7,7 @@ title: Philip Crockett
     <div class="flex-empty-space"></div>
 
     <header id="home-header">
-        <h1 id="home-title">Philip Crockett</h1>
+        <h1 id="home-title">{{ global.me }}</h1>
         <p class="subtitle">
             <em>American in Germany, husband, software developer, outdoor enthusiast</em>
         </p>
@@ -42,7 +41,7 @@ title: Philip Crockett
     <div class="flex-empty-space"></div>
 
     <footer>
-        <p>&copy; 2019-2021 Philip Crockett &#183; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
+        <p>&copy; {{ global.copyrightDate }} {{ global.me }} &#183; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
     </footer>
 
 </div>
