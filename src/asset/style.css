@@ -13,13 +13,17 @@ body {
     font-size: 1.2em;
     line-height: 1.4em;
     color: #333;
+    background-color: #fafafa;
+    margin: 0;
+}
+
+#content {
     margin-left: auto;
     margin-right: auto;
     padding-left: 1em;
     padding-right: 1em;
     padding-bottom: 3em;
     max-width: 40em;
-    background-color: #fafafa;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -28,8 +32,25 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 header {
-    text-align: center;
     font-family: "Fira Sans", sans-serif;
+}
+
+#home-header {
+    text-align: center;
+}
+
+#site-header {
+    font-size: 1.2em;
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    padding: 0.6em;
+    width: 100%;
+    background-color: #ddd;
+}
+
+header a {
+    color: #333;
 }
 
 a {
@@ -37,7 +58,16 @@ a {
     color: #0e00d7;
 }
 
+a:hover {
+    text-shadow: 0 0 1px;
+}
+
+.flex-empty-space {
+    flex-grow: 1;
+}
+
 #home-center {
+    font-family: "Fira Sans", sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -71,6 +101,23 @@ a {
     height: 2em;
 }
 
+#home-nav {
+    font-size: 1.4em;
+    line-height: 1.8em;
+}
+
+#home-nav a {
+    display: block;
+    text-align: center;
+}
+
+footer {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    box-sizing: border-box;
+}
+
 @media print {
     body {
         font-size: 1em;
@@ -90,6 +137,14 @@ a {
     }
 
     #home-icons a {
+        color: #ccc;
+    }
+
+    #site-header {
+        background-color: #444;
+    }
+
+    header a {
         color: #ccc;
     }
 }
