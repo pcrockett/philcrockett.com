@@ -4,10 +4,13 @@
 		{
 			"type": "npm",
 			"script": "build",
-			"group": "build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
 			"problemMatcher": [],
 			"label": "npm: build",
-			"detail": "npx @11ty/eleventy",
+			"detail": "npx @11ty/eleventy"
 		},
 		{
 			"type": "npm",

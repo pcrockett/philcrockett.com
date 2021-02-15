@@ -1,11 +1,11 @@
 @font-face {
     font-family: "Fira Sans";
-    src: url("font/Fira_Sans/FiraSans-Regular.ttf");
+    src: url("fonts/Fira_Sans/FiraSans-Regular.ttf");
 }
 
 @font-face {
     font-family: "Merriweather";
-    src: url("font/Merriweather/Merriweather-Regular.ttf");
+    src: url("fonts/Merriweather/Merriweather-Regular.ttf");
 }
 
 body {

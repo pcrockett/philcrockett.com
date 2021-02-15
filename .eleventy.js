@@ -4,10 +4,13 @@ module.exports = function(eleventyConfig) {
         return `<a href="${url}" target="_blank" rel="noopener me">${title}</a>`;
     });
 
+    eleventyConfig.addPassthroughCopy("src/assets");
+    eleventyConfig.addPassthroughCopy({ "src/_files": "/" });
+
     return {
         dir: {
             input: "src"
         },
-        templateFormats: ["html", "liquid", "md", "css", "ttf"]
+        templateFormats: ["html", "liquid", "md" ]
     };
 };
