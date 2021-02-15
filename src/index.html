@@ -34,8 +34,9 @@ layout: base.liquid
     </section>
 
     <section id="home-nav">
-        <a href="/about/">About</a>
-        <a href="/links/">Links</a>
+        {% for page in mainPages %}
+        <a href="{{ page.href }}">{{ page.title }}</a>
+        {% endfor %}
     </section>
 
     <div class="flex-empty-space"></div>

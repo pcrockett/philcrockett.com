@@ -49,6 +49,14 @@ header {
     background-color: #ddd;
 }
 
+#site-header nav {
+    display: inline-block;
+}
+
+#site-header nav > a {
+    margin-left: 0.8em;
+}
+
 header a {
     color: #333;
 }
