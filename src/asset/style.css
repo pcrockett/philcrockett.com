@@ -22,7 +22,7 @@ body {
     margin-right: auto;
     padding-left: 1em;
     padding-right: 1em;
-    padding-bottom: 3em;
+    padding-bottom: 2em;
     max-width: 40em;
 }
 
@@ -124,6 +124,10 @@ footer {
     margin-right: auto;
     text-align: center;
     box-sizing: border-box;
+}
+
+.stay-above-header {
+    margin-bottom: 3em;
 }
 
 @media print {
