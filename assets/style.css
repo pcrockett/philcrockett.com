@@ -33,6 +33,7 @@ h1, h2, h3, h4, h5, h6 {
 
 header {
     font-family: "Fira Sans",Trebuchet MS,Helvetica,Arial,sans-serif;
+    box-sizing: border-box;
 }
 
 #home-header {
@@ -53,8 +54,9 @@ header {
     display: inline-block;
 }
 
-#site-header nav > a {
-    margin-left: 0.8em;
+#site-header a {
+    margin-left: 0.4em;
+    margin-right: 0.4em;
 }
 
 header a {
