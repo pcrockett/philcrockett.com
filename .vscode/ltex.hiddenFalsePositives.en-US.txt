@@ -1,0 +1,1 @@
+{"rule":"COMMA_COMPOUND_SENTENCE","sentence":"^\\Q\"We expose people to information and ideas from all sides of the political spectrum so they can better understand the world — and each other.\"\\E$"}
