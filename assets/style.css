@@ -23,12 +23,13 @@ body {
     padding-left: 1em;
     padding-right: 1em;
     padding-bottom: 2em;
-    max-width: 40em;
+    max-width: 43em;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "Fira Sans",Trebuchet MS,Helvetica,Arial,sans-serif;
     line-height: 1em; /* Fix wrapping of headers on narrow screens */
+    font-weight: 500;
 }
 
 header {
@@ -69,7 +70,8 @@ a {
 }
 
 a:hover {
-    text-shadow: 0 0 1px;
+    /* text-shadow: 0 0 1px; */
+    font-weight: 700;
 }
 
 .flex-empty-space {
