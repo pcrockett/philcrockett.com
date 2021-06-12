@@ -9,8 +9,7 @@ The following is a list of things I think are awesome and worth sharing:
 
 * {% newTabLink "Eleventy" "https://www.11ty.dev" %}: A simple static site generator which I personally find to be more intuitive than {% newTabLink "Hugo" "https://gohugo.io/" %} or {% newTabLink "Jekyll" "https://jekyllrb.com/" %}. The source for this website can be found {% newTabLink "on GitHub" "https://github.com/pcrockett/philcrockett.com" %}.
 * {% newTabLink "Standard Notes" "https://standardnotes.org/" %}: A great note-taking app that syncs notes between devices. End-to-end encrypted, runs on all major OSes, 100% open source (both server and client code), self-hostable, and the team behind it has a really admirable business model.
-* {% newTabLink "Podman" "https://podman.io/" %}: An alternative to {% newTabLink "Docker" "https://www.docker.com/" %} that requires no daemon running as root. I also find it much easier to use and more reliable than {% newTabLink "LXC" "https://linuxcontainers.org/lxc/introduction/" %}.
-* {% newTabLink "Keyoxide.org" "https://keyoxide.org" %}: An interesting decentralized alternative to {% newTabLink "Keybase" "https://keybase.io" %}. I haven't set up any proofs (not sure if I will), but you can see my Keyoxide profile {% newTabLink "here" "https://keyoxide.org/contact@philcrockett.com" %}. It's kind of a toy at the moment — I have encountered no practical need for it yet.
+* {% newTabLink "My Bash script template" "https://gist.github.com/pcrockett/8e04641f8473081c3a93de744873f787" %}: Bash is a terrible language. But it's not so bad if you're using {% newTabLink "ShellCheck" "https://github.com/koalaman/shellcheck" %} and you have a nice template to start from. I copy / paste / modify this script any time I want to automate something new in Linux. I also use it for things like syntax reminders, and I update it periodically when I discover something new and useful.
 
 ## Operating Systems
 
