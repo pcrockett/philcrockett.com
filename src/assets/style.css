@@ -123,6 +123,17 @@ a:hover {
     text-align: center;
 }
 
+#home-avatar {
+    width: 15em;
+    height: 15em;
+    background-image: url("avatar.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    min-width: 5em;
+    min-height: 5em;
+}
+
 footer {
     font-family: "Fira Sans",Trebuchet MS,Helvetica,Arial,sans-serif;
     margin-left: auto;
@@ -163,5 +174,9 @@ footer {
 
     header a {
         color: #ccc;
+    }
+
+    #home-avatar {
+        background-image: url("avatar-dark.svg");
     }
 }
