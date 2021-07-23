@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="15mm" height="15mm" version="1.1" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+ <style>#background rect {
+        display: inline;
+        fill: #fafafa;
+        fill-opacity: 1;
+        stroke: none;
+     }
+     #content path {
+        fill: #333333;
+        fill-opacity: 1;
+     }</style>
+ <g id="background" transform="translate(-8.5972 -10.227)">
+  <rect x="8.5972" y="10.227" width="15" height="15" style="stroke-width:.5"/>
+ </g>
+ <g id="content" transform="translate(-8.5972 -10.227)">
+  <g transform="matrix(.26458 0 0 .26458 -31.27 -75.477)" aria-label="PC">
+   <path d="m165.85 338.49q5.12 0 7.92 2.16 2.8 2.12 2.8 6.36 0 4.52-2.92 6.72t-7.76 2.2h-3.48v10.12h-3.8v-27.56zm-0.12 14.44q3.32 0 5.04-1.28 1.76-1.28 1.76-4.6 0-2.96-1.76-4.28-1.72-1.32-4.96-1.32h-3.4v11.48z"/>
+   <path d="m191.49 338.01q2.48 0 4.16 0.64 1.72 0.64 3.48 2.08l-2.08 2.44q-2.52-2.04-5.32-2.04-3.44 0-5.56 2.64-2.08 2.64-2.08 8.48 0 5.68 2.08 8.4 2.08 2.68 5.52 2.68 1.76 0 3.08-0.6t2.8-1.68l1.88 2.4q-1.28 1.32-3.28 2.2t-4.6 0.88q-3.36 0-6-1.64-2.6-1.68-4.08-4.88-1.44-3.24-1.44-7.76t1.52-7.72q1.52-3.24 4.12-4.88t5.8-1.64z"/>
+  </g>
+ </g>
+</svg>
