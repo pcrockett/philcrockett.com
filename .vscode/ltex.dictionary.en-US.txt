@@ -19,3 +19,4 @@ openpgp
 Screeps
 Fairphone
 ShellCheck
+Favycon
