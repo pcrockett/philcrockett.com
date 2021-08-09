@@ -177,8 +177,4 @@ footer {
     header a {
         color: #ccc;
     }
-
-    #home-avatar {
-        background-image: url("avatar-dark.svg");
-    }
 }
