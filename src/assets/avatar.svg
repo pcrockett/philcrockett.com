@@ -3,7 +3,7 @@
 <svg width="100mm" height="100mm" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
  <style>.skin {
       stroke: none;
-      fill: #eee;
+      fill: #d6beb5;
       fill-opacity: 1;
       stroke-width: 0.352687px;
       stroke-linecap: butt;
@@ -14,16 +14,16 @@
       stroke-linejoin: round;
       stroke-linecap: butt;
       stroke-width: 0.865;
-      stroke: #555;
-      fill: #555;
+      stroke: #815e25;
+      fill: #815e25;
    }
    .shaved {
-      fill: #ccc;
-      stroke: none;
+      fill:#b99d83;
+      stroke:none;
    }
    .wrinkle {
       fill: none;
-      stroke: #bbb;
+      stroke: #ba9a8d;
       stroke-linejoin: bevel;
       stroke-linecap:round;
       stroke-opacity: 1;
@@ -41,13 +41,13 @@
    }
    .outline {
       fill: none;
-      stroke: #555;
+      stroke: #815e25;
       stroke-width: 0.352687px;
       stroke-linecap: butt;
       stroke-linejoin: miter;
    }
    .eye-whites {
-      fill: #fafafa;
+      fill: #d7d7d7;
       fill-opacity:1;
       stroke:none;
       stroke-width:0.264583px;
@@ -56,7 +56,7 @@
       stroke-opacity:1;
    }
    .iris {
-      fill:#555;
+      fill:#415893;
       fill-opacity:1;
       stroke:none;
       stroke-width:0.264583px;
@@ -66,15 +66,14 @@
    }
    .nose {
       fill:none;
-      stroke:#ccc;
+      stroke:#ba9a8d;
       stroke-width:0.353;
       stroke-linecap:butt;
       stroke-linejoin:miter;
       stroke-miterlimit:4;
       stroke-dasharray:none;
       stroke-opacity:1;
-   }
- </style>
+   }</style>
  <g>
   <path class="skin" d="m47.416 16.863 5.5348 0.75683 4.5989 2.5043 3.9651 3.2407 3.2565 3.8327 3.4214 9.0192 0.34743 4.0407-0.35889 1.9647 0.1204 3.2347 2.3749 3.64 4.2574 10.619 1.6886 14.701-3.626 5.2793-12.236 3.4347-9.9683-1.4143-8.9947-3.8385-8.7366-11.903-3.8542-0.07361-5.0477-6.4433-1.112-5.1508 1.6052-1.8928 1.8506 0.32438-2.3067-6.4831-0.41835-7.8905 2.1283-6.2598 4.1953-6.2156 3.2292-3.1466 3.8226-2.6161 4.7385-2.2389z"/>
   <path class="wrinkle wrinkle-severe" d="m53.464 30.381 1.174 0.41259 3.0608-0.10306 2.9579-0.38118 1.6458-0.38155 0.92712-0.08809 1.4247 0.49491 1.4044 0.25689"/>
