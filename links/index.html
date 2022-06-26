@@ -36,33 +36,65 @@
         <p>The following is a list of things I think are awesome and worth sharing:</p>
 <h2>Software and Services</h2>
 <ul>
-<li><a href="https://www.11ty.dev" target="_blank" rel="noopener">Eleventy</a>: A simple static site generator which I personally find to be more intuitive than <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> or <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a>. The source for this website can be found <a href="https://github.com/pcrockett/philcrockett.com" target="_blank" rel="noopener">on GitHub</a>.</li>
-<li><a href="https://standardnotes.org/" target="_blank" rel="noopener">Standard Notes</a>: A great note-taking app that syncs notes between devices. End-to-end encrypted, runs on all major OSes, 100% open source (both server and client code), self-hostable, and the team behind it has a really admirable business model.</li>
-<li><a href="https://gist.github.com/pcrockett/8e04641f8473081c3a93de744873f787" target="_blank" rel="noopener">My Bash script template</a>: Bash is a terrible language. But it's not so bad if you're using <a href="https://github.com/koalaman/shellcheck" target="_blank" rel="noopener">ShellCheck</a> and you have a nice template to start from. I copy / paste / modify this script any time I want to automate something new in Linux. I also use it for things like syntax reminders, and I update it periodically when I discover something new and useful.</li>
+<li><a href="https://www.11ty.dev" target="_blank" rel="noopener">Eleventy</a>: A simple static site generator which I personally find to be more
+intuitive than <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> or <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a>. The
+source for this website can be found <a href="https://github.com/pcrockett/philcrockett.com" target="_blank" rel="noopener">on GitHub</a>.</li>
+<li><a href="https://tailscale.com/" target="_blank" rel="noopener">Tailscale</a>: “A secure network that just works.” A mesh VPN that gives your
+devices the ability to automatically find each other and establish direct encrypted connections when possible. Relies on
+the <a href="https://www.wireguard.com/" target="_blank" rel="noopener">WireGuard protocol</a>. I use it extensively, including some of the less
+documented features like <a href="https://github.com/pcrockett/tailscale-container" target="_blank" rel="noopener">exit nodes</a> and
+<a href="https://tailscale.com/kb/1019/subnets/" target="_blank" rel="noopener">subnet routers</a>. It’s a networking Swiss army knife.</li>
+<li><a href="https://standardnotes.org/" target="_blank" rel="noopener">Standard Notes</a>: A great note-taking app that syncs notes between
+devices. End-to-end encrypted, runs on all major OSes, 100% open source (both server and client code), self-hostable,
+and the team behind it has a really admirable business model. Downside: It’s developed in JavaScript, and when you have
+thousands of notes, it really bogs down (especially on Android). Currently looking for a replacement.</li>
+<li><a href="https://gist.github.com/pcrockett/8e04641f8473081c3a93de744873f787" target="_blank" rel="noopener">My Bash script template</a>:
+Bash is a terrible language. But it’s not so bad if you’re using <a href="https://github.com/koalaman/shellcheck" target="_blank" rel="noopener">ShellCheck</a>
+and you have a nice template to start from. I copy / paste / modify this script any time I want to automate something
+new in Linux. I also use it for things like syntax reminders, and I update it periodically when I discover something
+new and useful.</li>
 </ul>
 <h2>Operating Systems</h2>
 <ul>
-<li><a href="https://docs.fedoraproject.org/en-US/fedora-silverblue/#introduction" target="_blank" rel="noopener">Fedora Silverblue</a>: The Linux distribution currently running on my laptop. It's an &quot;immutable&quot; variant of <a href="https://getfedora.org/en/workstation/" target="_blank" rel="noopener">Fedora Workstation</a>, relying on <a href="https://ostreedev.github.io/ostree/introduction/" target="_blank" rel="noopener">OSTree</a> instead of a traditional package manager. It is minimalistic and yet very polished, and thanks to its immutable design, I don't have to worry about irreversibly cluttering up my system over time.</li>
-<li><a href="https://e.foundation/" target="_blank" rel="noopener">/e/OS</a>: A project based on <a href="https://lineageos.org/" target="_blank" rel="noopener">LineageOS</a> that seeks to bring privacy-friendly un-Googled Android to the masses. Also provides privacy-friendly services (email, cloud storage, etc) if you're interested in that sort of thing. Still very beta, but usable.</li>
+<li><a href="https://docs.fedoraproject.org/en-US/fedora-silverblue/#introduction" target="_blank" rel="noopener">Fedora Silverblue</a>,
+<a href="https://pop.system76.com/" target="_blank" rel="noopener">Pop!</a>, <a href="https://archlinux.org/" target="_blank" rel="noopener">Arch</a>: These
+three operating systems are my current favorites, and I can never decide which one I want to keep installed on my
+laptop. Silverblue is an immutable OS (the future!), Pop is a joy to use when I actually want to get stuff done (amazing
+keyboard-driven UI), and Arch is great for tinkering.</li>
+<li><a href="https://grapheneos.org/" target="_blank" rel="noopener">GrapheneOS</a>: A privacy and security-oriented fork of Android. For a while
+I used <a href="https://e.foundation/" target="_blank" rel="noopener">/e/OS</a>, however I discovered that /e/ is over-extended. They try to
+support too many phone models and too much software, with not enough resources. This leads to low-quality outdated
+software, which is frustrating and insecure. Graphene is the opposite; They only support recent Pixel models, meaning
+they have the resources to keep up, and they produce an extremely polished, high-quality OS.</li>
 </ul>
 <h2>Devices</h2>
 <ul>
-<li><a href="https://www.fairphone.com/" target="_blank" rel="noopener">Fairphone</a>: A modular Android phone that aims to be easy to repair, sustainable, and fair trade. You can also <a href="https://esolutions.shop/shop/e-os-fairphone-3-plus/" target="_blank" rel="noopener">get it preinstalled with /e/OS</a>. Sadly, it only ships to Europe.</li>
-<li><a href="https://www.raspberrypi.org/" target="_blank" rel="noopener">Raspberry Pi</a>: A great little computer that's affordable and surprisingly powerful. Great for tinkering and learning, as well as running a tiny efficient home server or simple desktop PC.</li>
+<li><a href="https://www.raspberrypi.org/" target="_blank" rel="noopener">Raspberry Pi</a>: A great little computer that’s affordable and
+surprisingly powerful. Great for tinkering and learning, as well as running a tiny efficient home server or simple
+desktop PC. I have a couple Pis in a couple different locations running <a href="https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4" target="_blank" rel="noopener">Arch ARM</a>
+and <a href="https://tailscale.com/" target="_blank" rel="noopener">Tailscale</a>. They are subnet routers and exit nodes, giving me access to
+a lot of things no matter where I am in the world.</li>
 </ul>
 <h2>Security</h2>
 <ul>
-<li><a href="https://securityplanner.org/" target="_blank" rel="noopener">Security Planner</a>: Answer a few questions, and get a simple plan for improving your privacy and security, with links to useful resources for further education. Very user-friendly, great for people ranging from aging parents to journalists.</li>
-<li><a href="https://www.qubes-os.org/" target="_blank" rel="noopener">Qubes OS</a>: A high-security operating system that uses virtual machines to compartmentalize various areas of life. Often used by security researchers or other people in high-risk situations. I used it for a few months and was really impressed, though it ended up being too sluggish on my aging laptop.</li>
+<li><a href="https://securityplanner.org/" target="_blank" rel="noopener">Security Planner</a>: Answer a few questions, and get a simple plan for
+improving your privacy and security, with links to useful resources for further education. Very user-friendly, great
+for people ranging from aging parents to journalists.</li>
+<li><a href="https://www.qubes-os.org/" target="_blank" rel="noopener">Qubes OS</a>: A high-security operating system that uses virtual machines
+to compartmentalize various areas of life. Often used by security researchers or other people in high-risk situations.
+I used it for a few months and was really impressed, though it ended up being too sluggish on my aging laptop.</li>
 </ul>
 <h2>Information</h2>
 <ul>
-<li><a href="https://www.allsides.com/unbiased-balanced-news" target="_blank" rel="noopener">AllSides</a>: News aggregation website that seeks to organize articles based on their bias: left, right, or center. &quot;We expose people to information and ideas from all sides of the political spectrum so they can better understand the world — and each other.&quot;</li>
-<li><a href="https://lobste.rs/" target="_blank" rel="noopener">Lobste.rs</a>: Technology link aggregation site similar to Hacker News, but instead of focusing on entrepreneurship, the focus tends more toward free and open source software.</li>
+<li><a href="https://www.allsides.com/unbiased-balanced-news" target="_blank" rel="noopener">AllSides</a>: News aggregation website that seeks to
+organize articles based on their bias: left, right, or center. “We expose people to information and ideas from
+all sides of the political spectrum so they can better understand the world — and each other.”</li>
+<li><a href="https://lobste.rs/" target="_blank" rel="noopener">Lobste.rs</a>: Technology link aggregation site similar to Hacker News, but
+instead of focusing on entrepreneurship, the focus tends more toward free and open source software.</li>
 </ul>
 <h2>Fun</h2>
 <ul>
-<li><a href="https://screeps.com/" target="_blank" rel="noopener">Screeps</a>: MMO sandbox game for programmers. Like a real-time strategy game, but it's constantly running even when you're not logged in, and all your units are controlled by code that you write. It's also a good opportunity to improve your <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a> skills.</li>
+<li><a href="https://screeps.com/" target="_blank" rel="noopener">Screeps</a>: MMO sandbox game for programmers. Like a real-time strategy game, but it’s constantly running even when you’re not logged in, and all your units are controlled by code that you write. It’s also a good opportunity to improve your <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a> skills.</li>
 </ul>
 
     </section>
