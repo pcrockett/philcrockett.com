@@ -21,7 +21,9 @@ const shortcodes = {
 
 module.exports = function(eleventyConfig) {
 
-    eleventyConfig.addShortcode("newTabLink", shortcodes.newTabLink);
+    Object.keys(shortcodes).forEach(
+        name => eleventyConfig.addShortcode(name, shortcodes[name])
+    );
 
     eleventyConfig.addPassthroughCopy("src/assets");
     eleventyConfig.addPassthroughCopy({ "src/_files": "/" });
