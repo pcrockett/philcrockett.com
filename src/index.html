@@ -17,28 +17,34 @@ layout: base.liquid
 
     <section id="home-icons">
         <!--
-            Icons borrowed from my old Hugo website using the Hermit theme:
+            GitHub and Contact icons borrowed from my old Hugo website using the Hermit theme:
             https://github.com/Track3/hermit/blob/master/layouts/partials/svg.html
         -->
+        <a href="about/" title="About">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9.5359459" />
+                <path d="m 12,11 v 6"/>
+                <path d="M 12,8 V 8"/>
+            </svg>
+        </a>
         <a href="contact/" title="Contact Info">
-            <svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
             </svg>
         </a>
+        <a href="links/" title="Links">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M 10.413104,7.0000007 H 6.4131034 c -2.7614237,0 -5,2.2385745 -5,4.9999983 0,2.761424 2.2385763,5 5,5 h 4.0000006"/>
+                <path d="m 13.586898,6.9999999 h 3.999999 c 2.761424,0 5,2.2385763 5,5.0000001 0,2.761424 -2.238576,5 -5,5 h -3.999999"/>
+                <path d="M 7.8880078,12 H 16.111992"/>
+            </svg>
+        </a>
         <a href="https://github.com/pcrockett" target="_blank" rel="noopener" title="GitHub">
-            <svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
             </svg>
         </a>
-    </section>
-
-    <section id="home-nav">
-        {% for page in mainPages %}
-        <a href="{{ page.href }}">{{ page.title }}</a>
-        {% endfor %}
     </section>
 
     <div class="flex-empty-space"></div>
