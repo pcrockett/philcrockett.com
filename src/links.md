@@ -31,14 +31,26 @@ documented features like {% newTabLink "exit nodes" "https://github.com/pcrocket
 
 A great note-taking app that syncs notes between devices. End-to-end encrypted, runs on all major OSes, 100% open
 source (both server and client code), self-hostable, and the team behind it has a really admirable business model.
-Downside: It&rsquo;s developed in JavaScript, and when you have thousands of notes, it really bogs down (especially on
+Downside: It's developed in JavaScript, and when you have thousands of notes, it really bogs down (especially on
 Android). Currently looking for a replacement.
+
+## Software Development
+
+### Kotlin
+
+{% newTabLink "https://kotlinlang.org/" %}
+
+Known mostly for Android development and often treated as a &ldquo;better Java,&rdquo; it is so much more. For me, it has been a
+great introduction to functional programming, and I _love_ it. Though I have a theory that I'm still testing: I think
+it may only be practical to write significant amounts of Kotlin in an
+{% newTabLink "IntelliJ" "https://www.jetbrains.com/idea/" %}-based IDE. It would be extremely difficult to write more
+than a few lines of Kotlin in a text editor like Vim or GEdit.
 
 ### My Bash Script Template
 
 {% newTabLink "https://gist.github.com/pcrockett/8e04641f8473081c3a93de744873f787" %}
 
-Bash is a terrible language. But it&rsquo;s not so bad if you&rsquo;re using {% newTabLink "ShellCheck" "https://github.com/koalaman/shellcheck" %}
+Bash is a terrible language. But it's not so bad if you're using {% newTabLink "ShellCheck" "https://github.com/koalaman/shellcheck" %}
 and you have a nice template to start from. I copy / paste / modify this script any time I want to automate something
 new in Linux. I also use it for things like syntax reminders, and I update it periodically when I discover something
 new and useful.
