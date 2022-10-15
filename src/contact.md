@@ -5,7 +5,7 @@ title: Contact
 
 ## Email
 
-You can email me at [contact@philcrockett.com](mailto:contact@philcrockett.com). Please don&rsquo;t expect an immediate
+You can email me at [contact@philcrockett.com](mailto:contact@philcrockett.com). Please don't expect an immediate
 response.
 
 ## PGP Key

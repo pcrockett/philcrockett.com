@@ -23,7 +23,7 @@ website can be found {% newTabLink "on GitHub" "https://github.com/pcrockett/phi
 each other and establish direct encrypted connections when possible. Relies on the
 {% newTabLink "WireGuard protocol" "https://www.wireguard.com/" %}. I use it extensively, including some of the less
 documented features like {% newTabLink "exit nodes" "https://github.com/pcrockett/tailscale-container" %} and
-{% newTabLink "subnet routers" "https://tailscale.com/kb/1019/subnets/" %}. It&rsquo;s a networking Swiss army knife.
+{% newTabLink "subnet routers" "https://tailscale.com/kb/1019/subnets/" %}. It's a networking Swiss army knife.
 
 ### Standard Notes
 
@@ -40,9 +40,9 @@ Android). Currently looking for a replacement.
 
 {% newTabLink "https://kotlinlang.org/" %}
 
-Known mostly for Android development and often treated as a &ldquo;better Java,&rdquo; it is so much more. For me, it has been a
-great introduction to functional programming, and I _love_ it. Though I have a theory that I'm still testing: I think
-it may only be practical to write significant amounts of Kotlin in an
+Known mostly for Android development and often treated as a &ldquo;better Java,&rdquo; it is so much more. For me, it
+has been a great introduction to functional programming, and I _love_ it. Though I have a theory that I'm still
+testing: I think it may only be practical to write significant amounts of Kotlin in an
 {% newTabLink "IntelliJ" "https://www.jetbrains.com/idea/" %}-based IDE. It would be extremely difficult to write more
 than a few lines of Kotlin in a text editor like Vim or GEdit.
 
