@@ -29,7 +29,14 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: "Fira Sans",Trebuchet MS,Helvetica,Arial,sans-serif;
     line-height: 1em; /* Fix wrapping of headers on narrow screens */
+}
+
+h1, h2 {
     font-weight: 500;
+}
+
+h3, h4, h5, h6 {
+    font-weight: 700
 }
 
 header {
@@ -113,16 +120,11 @@ a:hover {
     display: inline-block;
     width: 2em;
     height: 2em;
-}
-
-#home-nav {
-    font-size: 1.4em;
-    line-height: 1.8em;
-}
-
-#home-nav a {
-    display: block;
-    text-align: center;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 #home-avatar {
