@@ -36,17 +36,17 @@ h1, h2 {
     font-weight: 500;
 }
 
-h3, h4, h5, h6 {
-    font-weight: 700;
-    margin-top: 1.7em;
-    margin-bottom: 0.7em;
-}
-
 h2 {
     margin-top: 1.7em;
     padding-top: 0.2em;
     text-transform: uppercase;
     border-top: 2px solid #474747;
+}
+
+h3, h4, h5, h6 {
+    font-weight: 700;
+    margin-top: 1.7em;
+    margin-bottom: 0.7em;
 }
 
 header {
