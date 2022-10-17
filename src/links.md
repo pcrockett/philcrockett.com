@@ -110,9 +110,11 @@ though it ended up being too sluggish on my aging laptop.
 
 ### AllSides
 
-{% newTabLink "https://www.allsides.com/unbiased-balanced-news" %}: News aggregation website that seeks to organize
-articles based on their bias: left, right, or center. &ldquo;We expose people to information and ideas from all sides
-of the political spectrum so they can better understand the world — and each other.&rdquo;
+{% newTabLink "https://www.allsides.com/unbiased-balanced-news" %}
+
+News aggregation website that seeks to organize articles based on their bias: left, right, or center. &ldquo;We expose
+people to information and ideas from all sides of the political spectrum so they can better understand the world — and
+each other.&rdquo;
 
 ### Lobsters
 
