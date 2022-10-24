@@ -1,0 +1,10 @@
+---
+layout: layout.liquid
+title: Notes
+---
+
+<ul>
+    {%- for note in collections.note -%}
+    <li><a href="{{ note.url }}">{{ note.data.title }}</a></li>
+    {%- endfor -%}
+</ul>
