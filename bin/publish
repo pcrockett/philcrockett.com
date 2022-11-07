@@ -5,11 +5,12 @@
 set -Eeuo pipefail
 
 SCRIPT_DIR="$(dirname "$(readlink -f "${0}")")"
+REPO_DIR="$(dirname "${SCRIPT_DIR}")"
 SITE_DIR_NAME="_site"
-SITE_DIR="${SCRIPT_DIR}/${SITE_DIR_NAME}"
+SITE_DIR="${REPO_DIR}/${SITE_DIR_NAME}"
 PUBLISH_BRANCH="gh-pages"
 
-pushd "${SCRIPT_DIR}" > /dev/null
+pushd "${REPO_DIR}" > /dev/null
 
 if [ "$(git status --short)" ]; then
     echo "The working directory is dirty. Commit or stash any pending changes."
