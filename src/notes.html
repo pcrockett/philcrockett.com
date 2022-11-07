@@ -4,6 +4,7 @@ title: Notes
 pagination:
   data: collections.note
   size: 20
+  reverse: true
 ---
 
 <p>
@@ -11,7 +12,7 @@ I don't want to maintain a blog. But I do want a way to publish random thoughts 
 </p>
 <ul>
     {%- for note in pagination.items -%}
-    <li><a href="{{ note.url }}">{{ note.data.title }}</a></li>
+    <li><a href="{{ note.url }}">{{ note.data.title }}</a> - {{ note.data.date | date: "%Y-%m-%d" }}</li>
     {%- endfor -%}
 </ul>
 {%- if pagination.href.previous -%}

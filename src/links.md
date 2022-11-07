@@ -1,6 +1,7 @@
 ---
-layout: layout.liquid
 title: Links
+layout: layout.liquid
+date: 2021-02-15
 ---
 
 The following is a list of things I think are awesome and worth sharing:
