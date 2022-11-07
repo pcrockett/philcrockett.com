@@ -1,14 +1,18 @@
 [
     {
+        "title": "Home",
+        "href": "/"
+    },
+    {
         "title": "About",
         "href": "/about/"
     },
     {
-        "title": "Contact",
-        "href": "/contact/"
+        "title": "Notes",
+        "href": "/notes/"
     },
     {
-        "title": "Links",
-        "href": "/links/"
+        "title": "Contact",
+        "href": "/contact/"
     }
 ]
