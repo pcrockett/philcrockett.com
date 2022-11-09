@@ -20,7 +20,7 @@ website can be found {% newTabLink "on GitHub" "https://github.com/pcrockett/phi
 
 {% newTabLink "https://tailscale.com/" %}
 
-&ldquo;A secure network that just works.&rdquo; A mesh VPN that gives your devices the ability to automatically find
+"A secure network that just works." A mesh VPN that gives your devices the ability to automatically find
 each other and establish direct encrypted connections when possible. Relies on the
 {% newTabLink "WireGuard protocol" "https://www.wireguard.com/" %}. I use it extensively, including some of the less
 documented features like {% newTabLink "exit nodes" "https://github.com/pcrockett/tailscale-container" %} and
@@ -41,7 +41,7 @@ Android). Currently looking for a replacement.
 
 {% newTabLink "https://kotlinlang.org/" %}
 
-Known mostly for Android development and often treated as a &ldquo;better Java,&rdquo; it is so much more. For me, it
+Known mostly for Android development and often treated as a "better Java," it is so much more. For me, it
 has been a great introduction to functional programming, and I _love_ it. Though I have a theory that I'm still
 testing: I think it may only be practical to write significant amounts of Kotlin in an
 {% newTabLink "IntelliJ" "https://www.jetbrains.com/idea/" %}-based IDE. It would be extremely difficult to write more
@@ -113,9 +113,9 @@ though it ended up being too sluggish on my aging laptop.
 
 {% newTabLink "https://www.allsides.com/unbiased-balanced-news" %}
 
-News aggregation website that seeks to organize articles based on their bias: left, right, or center. &ldquo;We expose
+News aggregation website that seeks to organize articles based on their bias: left, right, or center. "We expose
 people to information and ideas from all sides of the political spectrum so they can better understand the world — and
-each other.&rdquo;
+each other."
 
 ### Lobsters
 

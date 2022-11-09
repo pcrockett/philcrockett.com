@@ -2,7 +2,8 @@ const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
 
 const markdownItOptions = {
-    html: true // you can include HTML tags in Markdown
+    html: true, // you can include HTML tags in Markdown
+    typographer: true
 }
 
 const markdownItAnchorOptions = {
