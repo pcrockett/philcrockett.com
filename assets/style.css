@@ -1,21 +1,61 @@
 @font-face {
     font-family: "Fira Sans";
     src: url("fonts/Fira_Sans/FiraSans-Regular.ttf");
+    font-display: swap;
 }
 
 @font-face {
-    font-family: "Merriweather";
-    src: url("fonts/Merriweather/Merriweather-Regular.ttf");
+    font-family: "Merriweather-Light";
+    src: url("fonts/Merriweather/Merriweather-Light.ttf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Merriweather-Bold";
+    src: url("fonts/Merriweather/Merriweather-Bold.ttf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Merriweather-Italic";
+    src: url("fonts/Merriweather/Merriweather-LightItalic.ttf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Merriweather-BoldItalic";
+    src: url("fonts/Merriweather/Merriweather-BoldItalic.ttf");
+    font-display: swap;
 }
 
 body {
-    font-family: "Merriweather",Georgia,Times,Times New Roman,serif;
+    font-family: "Merriweather-Light",Georgia,Times,Times New Roman,serif;
     font-size: 1.2em;
     line-height: 1.8em;
     color: #333;
     background-color: #fafafa;
     margin: 0;
     word-break: break-word;
+}
+
+body strong {
+    font-family: "Merriweather-Bold",Georgia,Times,Times New Roman,serif;
+    font-style: unset;
+}
+
+body em {
+    font-family: "Merriweather-Italic",Georgia,Times,Times New Roman,serif;
+    font-style: unset;
+}
+
+body em strong {
+    font-family: "Merriweather-BoldItalic",Georgia,Times,Times New Roman,serif;
+    font-style: unset;
+}
+
+body strong em {
+    font-family: "Merriweather-BoldItalic",Georgia,Times,Times New Roman,serif;
+    font-style: unset;
 }
 
 #content {
