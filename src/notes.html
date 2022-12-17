@@ -9,7 +9,7 @@ pagination:
 
 <ul>
     {%- for note in pagination.items -%}
-    <li><a href="{{ note.url }}">{{ note.data.title }}</a> - {{ note.data.date | date: "%Y-%m-%d" }}</li>
+    <li><a href="{{ note.url }}">{{ note.data.title }}</a> — {{ note.data.date | date: "%Y-%m-%d" }}</li>
     {%- endfor -%}
 </ul>
 {%- if pagination.href.previous -%}

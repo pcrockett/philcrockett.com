@@ -1,0 +1,25 @@
+---
+layout: layout.liquid
+---
+
+<small><em>Published on {{ page.date | date: "%Y-%m-%d" }}</em></small>
+
+{{ content }}
+
+{% assign prevNote = collections.note | getPreviousCollectionItem: page %}
+{% assign nextNote = collections.note | getNextCollectionItem: page %}
+
+{% if prevNote or nextNote %}
+<section>
+<h2>Read More</h2>
+<ul>
+{% if nextNote %}
+    <li>Next: <a href="{{ nextNote.url }}">{{ nextNote.data.title }}</a> — {{ nextNote.data.date | date: "%Y-%m-%d" }}</li>
+{% endif %}
+
+{% if prevNote %}
+    <li>Previous: <a href="{{ prevNote.url }}">{{ prevNote.data.title }}</a> — {{ prevNote.data.date | date: "%Y-%m-%d" }}</li>
+{% endif %}
+</ul>
+</section>
+{% endif %}
