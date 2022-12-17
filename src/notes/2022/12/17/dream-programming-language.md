@@ -32,6 +32,8 @@ The more niche requirements:
 
 I don't think this programming language exists as of 2022. If it does, do [let me know](/contact/)!
 
+{% mastodonCommentsSection "https://fosstodon.org/@pcrock/109528890000674779" %}
+
 [pony-caps]: https://tutorial.ponylang.io/reference-capabilities/index.html
 [rust-result]: https://doc.rust-lang.org/std/result/
 [rust-option]: https://doc.rust-lang.org/std/option/

@@ -4,21 +4,27 @@ const markdownItAnchor = require('markdown-it-anchor');
 const markdownItOptions = {
     html: true, // you can include HTML tags in Markdown
     typographer: true
-}
+};
 
 const markdownItAnchorOptions = {
     level: 1 // Add anchor IDs to header level 1 and greater
-}
+};
 
 const shortcodes = {
     newTabLink: (title, url) => {
         if (typeof url !== "string") {
             // The title _is_ the URL
-            url = title
+            url = title;
         }
         return `<a href="${url}" target="_blank" rel="noopener">${title}</a>`;
+    },
+
+    mastodonCommentsSection: (url) => {
+        // For use in Markdown only. Generates a standard comments section at the end of a note with a post URL.
+        const mastodonLink = shortcodes.newTabLink("Mastodon", "https://joinmastodon.org/")
+        return `## Comments?\n\nIf you have a ${mastodonLink} account, you can reply to [my post on Mastodon](${url}).`;
     }
-}
+};
 
 module.exports = function(eleventyConfig) {
 
