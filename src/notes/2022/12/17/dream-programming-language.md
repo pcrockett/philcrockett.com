@@ -15,6 +15,7 @@ The "normal" requirements:
 * Intuitive / enjoyable syntax
 * Reasonable learning curve
     * While I like Rust, I'm looking for something [with lower standards][rust-downsides]
+    * ... but with [higher standards than Go][go-simplicity]
 * Reasonably efficient performance
 * Open source
 * Runs well on Linux (cross-platform a bonus)
@@ -37,3 +38,4 @@ I don't think this programming language exists as of 2022. If it does, do [let m
 [rust-matching]: https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html
 [di]: https://en.wikipedia.org/wiki/Dependency_injection
 [rust-downsides]: https://mdwdotla.medium.com/using-rust-at-a-startup-a-cautionary-tale-42ab823d9454
+[go-simplicity]: https://fasterthanli.me/articles/i-want-off-mr-golangs-wild-ride#simple-is-a-lie
