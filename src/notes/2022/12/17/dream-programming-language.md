@@ -4,33 +4,32 @@ date: 2022-12-17
 ---
 
 I'm on the hunt for a fun programming language that I can pick up and mess with in my free time. I have a few fairly
-usual requirements that a lot of people ask for, plus a few less common requirements.
+normal requirements that a lot of people ask for, plus a few less common requirements. I don't think this programming
+language exists as of 2022. If it does, do me a solid and [let me know](/contact/)!
 
-The "normal" requirements:
+## The Usual Requirements
 
+* Functional programming paradigm (primarily)
 * Compiles to native, dependency-free executable
     * I could compromise on this if it were a small scripting language
-* Functional programming paradigm (primarily)
 * Robust type system
 * Intuitive / enjoyable syntax
 * Reasonable learning curve
     * While I like Rust, I'm looking for something [with lower standards][rust-downsides]
     * ... but with [higher standards than Go][go-simplicity]
-* Reasonably efficient performance
+* Reasonably efficient performance-wise
 * Open source
 * Runs well on Linux (cross-platform a bonus)
 
-The more niche requirements:
+## The Unusual Requirements
 
 * Uses [object capabilities][pony-caps]
     * no more static / global APIs for file, network, and other resources
     * encourages [dependency injection][di] instead
 * [Result types][rust-result] instead of exceptions
 * [Option types][rust-option] instead of nulls
-* Related to the above two points: robust [pattern matching][rust-matching]
-* Doesn't require a heavyweight IDE for everything
-
-I don't think this programming language exists as of 2022. If it does, do [let me know](/contact/)!
+* Robust [pattern matching][rust-matching] (important for the above two points)
+* Doesn't require a heavyweight IDE or excessively complex "new project" structure
 
 {% mastodonCommentsSection "https://fosstodon.org/@pcrock/109528890000674779" %}
 
