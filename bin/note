@@ -1,25 +1,42 @@
 #!/usr/bin/env bash
+#
+# Promote a previously-created draft to a note and add it to the repository.
+#
+# See `draft` script for context.
+#
 set -Eeuo pipefail
 
-ARG_NAME="${1:-index}"
+panic() {
+    echo "${@}"
+    exit 1
+}
+
+DRAFT_FILE="${1:-}"
+test ! "${DRAFT_FILE}" == "" || panic "Must specify a draft file."
+test -f "${DRAFT_FILE}" || panic "Does not exist: ${DRAFT_FILE}"
+
 SCRIPT_DIR="$(dirname "$(readlink -f "${0}")")"
 REPO_DIR="$(dirname "${SCRIPT_DIR}")"
 NOTE_DIR="${REPO_DIR}/src/notes/$(date +"%Y/%m/%d")"
-NOTE_FILE="${NOTE_DIR}/${ARG_NAME}.md"
+DRAFT_FILE_NAME="$(basename "${DRAFT_FILE}")"
+NOTE_FILE="${NOTE_DIR}/${DRAFT_FILE_NAME}"
+
+test ! -f "${NOTE_FILE}" || panic "This note is already published."
 
 mkdir --parent "${NOTE_DIR}"
 
-if ! [ -f "${NOTE_FILE}" ]; then
+DATE_STRING="$(date --iso-8601=seconds --utc)"
+REPLACE_SCRIPT="s/# date: PLACEHOLDER-DO-NOT-EDIT/date: ${DATE_STRING}/"
+sed "${REPLACE_SCRIPT}" "${DRAFT_FILE}" > "${NOTE_FILE}"
 
-    echo "---
-title: TODO
-date: $(date +"%Y-%m-%d")
----
+PUBLISHED_DIR="${REPO_DIR}/drafts/.published"
+mkdir --parent "${PUBLISHED_DIR}"
+mv "${DRAFT_FILE}" "${PUBLISHED_DIR}"
 
-" > "${NOTE_FILE}"
+echo "Draft promoted to note. Next steps:
 
-fi
-
-if [ "${EDITOR:-}" != "" ]; then
-    "${EDITOR}" "${NOTE_FILE}"
-fi
+git add src/notes
+git commit -m \"Publish ${DRAFT_FILE_NAME}\"
+publish
+git push --all
+"

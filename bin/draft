@@ -1,25 +1,38 @@
 #!/usr/bin/env bash
+#
+# Create a draft note in the .gitignore'd drafts directory.
+#
+# Use the `note` script to promote / publish the draft.
+#
 set -Eeuo pipefail
 
-ARG_NAME="${1:-index}"
+panic() {
+    echo "${@}"
+    exit 1
+}
+
+ARG_NAME="${1:-}"
+
+test ! "${ARG_NAME}" == "" || panic "Must specify a slug."
+
 SCRIPT_DIR="$(dirname "$(readlink -f "${0}")")"
 REPO_DIR="$(dirname "${SCRIPT_DIR}")"
-NOTE_DIR="${REPO_DIR}/drafts/"
-NOTE_FILE="${NOTE_DIR}/$(date +"%Y-%m-%d")_${ARG_NAME}.md"
+DRAFT_DIR="${REPO_DIR}/drafts/"
+DRAFT_FILE="${DRAFT_DIR}/${ARG_NAME}.md"
 
-mkdir --parent "${NOTE_DIR}"
+mkdir --parent "${DRAFT_DIR}"
 
-if ! [ -f "${NOTE_FILE}" ]; then
+if ! [ -f "${DRAFT_FILE}" ]; then
 
     echo "---
 title: TODO
-# date: $(date +"%Y-%m-%d")
+# date: PLACEHOLDER-DO-NOT-EDIT
 ---
 
-" > "${NOTE_FILE}"
+" > "${DRAFT_FILE}"
 
 fi
 
 if [ "${EDITOR:-}" != "" ]; then
-    "${EDITOR}" "${NOTE_FILE}"
+    "${EDITOR}" "${DRAFT_FILE}"
 fi
