@@ -80,7 +80,7 @@ h2 {
     margin-top: 1.7em;
     padding-top: 0.2em;
     text-transform: uppercase;
-    border-top: 2px solid #e2e2e2;
+    border-top: 2px solid #cbcbcb;
 }
 
 h3, h4, h5, h6 {
@@ -97,6 +97,12 @@ header {
 p {
     margin-top: 1.2em;
     margin-bottom: 1.2em;
+}
+
+blockquote {
+    border-left: 0.4em solid #cbcbcb;
+    padding-left: 1em;
+    margin-left: 1em;
 }
 
 #home-header {
@@ -128,12 +134,11 @@ header a {
 
 a {
     text-decoration: none;
-    color: #0e00d7;
+    color: #744203;
 }
 
 a:hover {
-    /* text-shadow: 0 0 1px; */
-    font-weight: 700;
+    color: #000;
 }
 
 .flex-empty-space {
@@ -220,7 +225,11 @@ footer {
     }
 
     a {
-        color: #9189ff
+        color: #9d6a15;
+    }
+
+    a:hover {
+        color: #fff;
     }
 
     #home-icons a {
@@ -237,5 +246,9 @@ footer {
 
     h2 {
         border-top: 2px solid #474747;
+    }
+
+    blockquote {
+        border-left-color: #474747;
     }
 }
