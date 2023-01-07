@@ -12,14 +12,9 @@ Two languages so far score the highest:
 ## Gleam
 
 {% newTabLink "Gleam" "https://gleam.run/" %} is _so close_ to what I'm looking for. It only misses one mark: native
-executables.
-
-Well, it also misses the _object capabilities_ requirement, but almost all other languages miss that feature as well.
-The few languages that have object capabilities are all in the experimental stage.
-
-Anyway, Gleam runs on the Erlang VM or compiles to JavaScript, which is a showstopper for the kind of little hobby
-command line programs I want to write. However if I ever decide to create a service that can be deployed to a server,
-I'll be super excited to try out Gleam.
+executables[^1]. Gleam runs on the Erlang VM or compiles to JavaScript, which is a showstopper for the kind of little
+hobby command line programs I want to write. However if I ever decide to create a service that can be deployed to a
+server, I'll be super excited to try out Gleam.
 
 ## OCaml
 
@@ -31,3 +26,6 @@ considered idiomatic.
 I'm going to continue playing with it. We'll see where this goes.
 
 {% mastodonCommentsSection "https://fosstodon.org/@pcrock/109587202658507764" %}
+
+[^1]: Well, Gleam also misses the _object capabilities_ requirement, but almost all other languages miss that feature as
+well. As of this writing, the few languages that have object capabilities are in the experimental stage.

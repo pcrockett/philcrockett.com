@@ -1,14 +1,6 @@
 const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
-
-const markdownItOptions = {
-    html: true, // you can include HTML tags in Markdown
-    typographer: true
-};
-
-const markdownItAnchorOptions = {
-    level: 1 // Add anchor IDs to header level 1 and greater
-};
+const markdownItFootnote = require('markdown-it-footnote');
 
 const shortcodes = {
     newTabLink: (title, url) => {
@@ -26,6 +18,29 @@ const shortcodes = {
     }
 };
 
+const markdownPlugins = [
+
+    (config) => {
+        // Thanks to:
+        //
+        // https://syntackle.live/blog/adding-custom-anchors-to-headings-in-markdown-eleventy-3NxBhIJO2OIr4XOj5LKc/
+        //
+        return config.use(markdownItAnchor, {
+            level: 1 // Add anchor IDs to header level 1 and greater
+        });
+    },
+
+    (config) => {
+        config = config.use(markdownItFootnote);
+        config.renderer.rules.footnote_block_open = () => {
+            return '<h2 id="footnotes">Footnotes</h2>\n' +
+            '<section class="footnotes">\n' +
+            '<ol class="footnotes-list">\n';
+        };
+        return config;
+    }
+]
+
 module.exports = function(eleventyConfig) {
 
     Object.keys(shortcodes).forEach(
@@ -35,15 +50,12 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/assets");
     eleventyConfig.addPassthroughCopy({ "src/_files": "/" });
 
-    // Thanks to:
-    //
-    // https://syntackle.live/blog/adding-custom-anchors-to-headings-in-markdown-eleventy-3NxBhIJO2OIr4XOj5LKc/
-    //
-    eleventyConfig.setLibrary(
-        "md",
-        markdownIt(markdownItOptions)
-            .use(markdownItAnchor, markdownItAnchorOptions)
-    );
+    let mdConfig = markdownIt({
+        html: true, // you can include HTML tags in Markdown
+        typographer: true // features like smart quotes
+    });
+    mdConfig = markdownPlugins.reduce((config, configFn) => configFn(config), mdConfig);
+    eleventyConfig.setLibrary("md", mdConfig);
 
     return {
         dir: {
