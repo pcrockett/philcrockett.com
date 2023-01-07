@@ -128,12 +128,11 @@ header a {
 
 a {
     text-decoration: none;
-    color: #0e00d7;
+    color: #744203;
 }
 
 a:hover {
-    /* text-shadow: 0 0 1px; */
-    font-weight: 700;
+    color: #000;
 }
 
 .flex-empty-space {
@@ -220,7 +219,11 @@ footer {
     }
 
     a {
-        color: #9189ff
+        color: #9d6a15;
+    }
+
+    a:hover {
+        color: #fff;
     }
 
     #home-icons a {
