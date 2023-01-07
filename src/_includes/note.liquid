@@ -11,7 +11,7 @@ layout: layout.liquid
 
 {% if prevNote or nextNote %}
 <section>
-<h2>Read More</h2>
+<h2>Other Posts</h2>
 <ul>
 {% if nextNote %}
     <li>Next: <a href="{{ nextNote.url }}">{{ nextNote.data.title }}</a> — {{ nextNote.data.date | date: "%Y-%m-%d" }}</li>
