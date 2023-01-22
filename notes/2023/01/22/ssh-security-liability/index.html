@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Phil Crockett - SSH: Security Liability?</title>
+        
+        <link href="/assets/style.css" rel="stylesheet">
+        <link rel="apple-touch-icon" sizes="57x57" href="/favicon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/favicon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/favicon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/favicon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/favicon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/favicon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/favicon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/favicon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/favicon-144x144.png">
+        <meta name="msapplication-config" content="/browserconfig.xml">
+        <link rel="me" href="https://fosstodon.org/@pcrock">
+    </head>
+    <body>
+        <div id="content">
+    
+    <h1>SSH: Security Liability?</h1>
+    
+    <section>
+        
+<small><em>Published on 2023-01-22</em></small>
+
+<p>SSH is pretty handy. As a hobbyist who actually <em>enjoys</em> managing a few Linux boxes, I use it all the time. However I
+can’t shake the feeling that it’s one of the largest security liabilities out there for a server administrator, despite
+the fact that the first S in SSH stands for “secure.”</p>
+<p>It has too much in common with projects like <a href="https://latacora.micro.blog/2019/07/16/the-pgp-problem.html">PGP / GPG</a> and OpenVPN, which:</p>
+<ul>
+<li>were designed a <em>long</em> time ago</li>
+<li>have huge C / C++ codebases</li>
+<li>are difficult to understand, configure, and use correctly</li>
+<li>make it really difficult to <a href="https://blog.codinghorror.com/falling-into-the-pit-of-success/">fall into the pit of success</a></li>
+</ul>
+<p>After all, if you need <a href="https://github.com/jtesta/ssh-audit">configuration auditing software</a> and a myriad of “hardening” guides on the Internet,
+then it just might be too complex.</p>
+<h2 id="learning-from-wireguard" tabindex="-1">Learning From WireGuard</h2>
+<p>I’m not aware of any widely-used alternatives that are secure. But if the <a href="https://www.wireguard.com/">WireGuard</a> developers ever come up with
+something, it’ll probably be exactly what I’m looking for.</p>
+<blockquote>
+<p>WireGuard has been designed with ease-of-implementation and simplicity in mind. It is meant to be easily implemented
+in very few lines of code, and easily auditable for security vulnerabilities.</p>
+</blockquote>
+<p>A great example of this is how WireGuard approaches versioning, which is exactly the opposite of PGP, OpenVPN, and SSH:</p>
+<blockquote>
+<p>WireGuard restricts the options for implementing cryptographic controls, limits the choices for key exchange
+processes, and maps algorithms to a small subset of modern cryptographic primitives. If a flaw is found in any of the
+primitives, a new version can be released that resolves the issue.</p>
+</blockquote>
+<p><small><a href="https://en.wikipedia.org/wiki/WireGuard">From Wikipedia</a></small></p>
+<h2 id="what-i-do" tabindex="-1">What I Do</h2>
+<p>I don’t bother with SSH configuration on my servers anymore. Instead, I rely on <a href="https://tailscale.com/">Tailscale</a> (which uses WireGuard)
+to connect to my servers. My firewall only allows SSH access via the Tailscale interface. At this point I could <em>almost</em>
+discard SSH entirely and use <a href="https://en.wikipedia.org/wiki/Telnet">Telnet</a> instead (though I don’t).</p>
+<p>Of course I have the luxury of being a self-hosted hobbyist, so I don’t have a very complex threat model, and this works
+well for me. I doubt if the same strategy would be feasible for someone who needed to <a href="https://goteleport.com/blog/how-uber-netflix-facebook-do-ssh/">manage a bunch of servers at scale</a>.</p>
+<p>I do suspect we would all be better off if we separated concerns a bit more: Use a simple VPN or similar service for
+establishing a secure tunnel, and use a <em>separate</em> system for interacting with the server through the tunnel.</p>
+
+
+
+
+
+
+<section>
+<h2>Other Posts</h2>
+<ul>
+
+
+
+    <li>Previous: <a href="/notes/2022/12/27/trying-ocaml/">Trying OCaml</a> — 2022-12-27</li>
+
+</ul>
+</section>
+
+
+    </section>
+</div>
+<footer class="stay-above-header">
+    <p>
+        &copy; 2019-2023 <a href="/">Phil Crockett</a> &#183;
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a><br>
+        <em><small>Theme adapted from <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hugo Hermit</a></small></em>
+    </p>
+</footer>
+<header id="site-header">
+    <nav>
+        
+        <a href="/">Home</a>
+        
+        <a href="/about/">About</a>
+        
+        <a href="/notes/">Notes</a>
+        
+        <a href="/contact/">Contact</a>
+        
+    </nav>
+</header>
+
+    </body>
+</html>
