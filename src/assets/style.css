@@ -103,6 +103,8 @@ blockquote {
     border-left: 0.4em solid #cbcbcb;
     padding-left: 1em;
     margin-left: 1em;
+    font-family: "Merriweather-Italic",Georgia,Times,Times New Roman,serif;
+    font-style: unset;
 }
 
 #home-header {
