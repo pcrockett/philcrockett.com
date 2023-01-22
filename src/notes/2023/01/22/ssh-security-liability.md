@@ -45,6 +45,8 @@ well for me. I doubt if the same strategy would be feasible for someone who need
 I do suspect we would all be better off if we separated concerns a bit more: Use a simple VPN or similar service for
 establishing a secure tunnel, and use a _separate_ system for interacting with the server through the tunnel.
 
+{% mastodonCommentsSection "https://fosstodon.org/@pcrock/109732805093391136" %}
+
 [gpg]: https://latacora.micro.blog/2019/07/16/the-pgp-problem.html
 [pit]: https://blog.codinghorror.com/falling-into-the-pit-of-success/
 [audit]: https://github.com/jtesta/ssh-audit
