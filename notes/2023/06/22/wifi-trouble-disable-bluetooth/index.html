@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Phil Crockett - 2.4 GHz WiFi Trouble? Disable Bluetooth.</title>
+        
+        <link href="/assets/style.css" rel="stylesheet">
+        <link rel="apple-touch-icon" sizes="57x57" href="/favicon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/favicon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/favicon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/favicon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/favicon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/favicon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/favicon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/favicon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/favicon-144x144.png">
+        <meta name="msapplication-config" content="/browserconfig.xml">
+        <link rel="me" href="https://fosstodon.org/@pcrock">
+    </head>
+    <body>
+        <div id="content">
+    
+    <h1>2.4 GHz WiFi Trouble? Disable Bluetooth.</h1>
+    
+    <section>
+        
+<small><em>Published on 2023-06-22</em></small>
+
+<hr>
+<p><strong>tl;dr:</strong> Bluetooth and 2.4 GHz WiFi don’t play nicely together. Here’s how I figured it out.</p>
+<hr>
+<p>I have both 2.4 and 5 GHz networks running in my home. I have found that my personal laptop has a <em>really</em> hard time scanning for / connecting to 2.4 GHz networks. It’ll eventually connect, but it takes up to a few minutes to find the 2.4 GHz network and work out a connection.</p>
+<p>I got tired of it and started searching the Interwebz.</p>
+<p>At some point in my web searches, I learned that I’m running an Intel wireless network card using the built-in Linux kernel <code>iwlwifi</code> driver. <em>Here’s partial output of <code>lspci -k</code>:</em></p>
+<pre><code>02:00.0 Network controller: Intel Corporation Wireless 8265 / 8275 (rev 78)
+    Subsystem: Intel Corporation Wireless 8265 / 8275
+    Kernel driver in use: iwlwifi
+    Kernel modules: iwlwifi
+</code></pre>
+<p>I also learned about the various config parameters for this driver. <em>Here’s partial output of <code>modinfo iwlwifi</code>:</em></p>
+<pre><code>parm:           swcrypto:using crypto in software (default 0 [hardware]) (int)
+parm:           11n_disable:disable 11n functionality, bitmap: 1: full, 2: disable agg TX, 4: disable agg RX, 8 enable agg TX (uint)
+parm:           amsdu_size:amsdu size 0: 12K for multi Rx queue devices, 2K for AX210 devices, 4K for other devices 1:4K 2:8K 3:12K (16K buffers) 4: 2K (default 0) (int)
+parm:           fw_restart:restart firmware in case of error (default true) (bool)
+parm:           nvm_file:NVM file name (charp)
+parm:           uapsd_disable:disable U-APSD functionality bitmap 1: BSS 2: P2P Client (default: 3) (uint)
+parm:           enable_ini:0:disable, 1-15:FW_DBG_PRESET Values, 16:enabled without preset value defined,Debug INI TLV FW debug infrastructure (default: 16)
+parm:           bt_coex_active:enable wifi/bt co-exist (default: enable) (bool)
+parm:           led_mode:0=system default, 1=On(RF On)/Off(RF Off), 2=blinking, 3=Off (default: 0) (int)
+parm:           power_save:enable WiFi power management (default: disable) (bool)
+parm:           power_level:default power save level (range from 1 - 5, default: 1) (int)
+parm:           disable_11ac:Disable VHT capabilities (default: false) (bool)
+parm:           remove_when_gone:Remove dev from PCIe bus if it is deemed inaccessible (default: false) (bool)
+parm:           disable_11ax:Disable HE capabilities (default: false) (bool)
+parm:           disable_11be:Disable EHT capabilities (default: false) (bool)
+</code></pre>
+<p>Well hey, what’s this <code>bt_coex_active:enable wifi/bt co-exist</code> business? Some web searching led me to <a href="https://superuser.com/a/1118989">this very old SuperUser answer</a>:</p>
+<blockquote>
+<p>The 2.4 GHz Wifi band and bluetooth spectrums have a great deal of overlap and can conflict with each other</p>
+</blockquote>
+<p>So apparently you can configure your driver to not allow Bluetooth and 2.4 GHz WiFi to be activated simultaneously, which can be important because their operating frequencies overlap.</p>
+<p>I don’t use (or like) Bluetooth anyway, so instead of messing with my driver, I just decided to turn Bluetooth off permanently.</p>
+<pre><code>sudo systemctl disable --now bluetooth
+</code></pre>
+<p>Problem solved.</p>
+
+
+
+
+
+
+<section>
+<h2>Other Posts</h2>
+<ul>
+
+
+
+    <li>Previous: <a href="/notes/2023/01/22/ssh-security-liability/">SSH: Security Liability?</a> — 2023-01-22</li>
+
+</ul>
+</section>
+
+
+    </section>
+</div>
+<footer class="stay-above-header">
+    <p>
+        &copy; 2019-2023 <a href="/">Phil Crockett</a> &#183;
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a><br>
+        <em><small>Theme adapted from <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hugo Hermit</a></small></em>
+    </p>
+</footer>
+<header id="site-header">
+    <nav>
+        
+        <a href="/">Home</a>
+        
+        <a href="/about/">About</a>
+        
+        <a href="/notes/">Notes</a>
+        
+        <a href="/contact/">Contact</a>
+        
+    </nav>
+</header>
+
+    </body>
+</html>
