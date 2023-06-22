@@ -107,6 +107,29 @@ blockquote {
     font-style: unset;
 }
 
+code {
+    font-size: 1.22em;
+    background: #d2d2d2;
+}
+
+p code {
+    padding: 0.2em;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    border-radius: 0.2em;
+}
+
+pre {
+    border-radius: 0.2em;
+    overflow-y: scroll;
+    background: #d2d2d2;
+}
+
+pre code {
+    margin: 0.5em;
+    display: inline-block;
+}
+
 #home-header {
     text-align: center;
 }
@@ -252,5 +275,13 @@ footer {
 
     blockquote {
         border-left-color: #474747;
+    }
+
+    code {
+        background: #4d4d4d;
+    }
+
+    pre {
+        background: #4d4d4d;
     }
 }
