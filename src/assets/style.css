@@ -193,6 +193,7 @@ a:hover {
     flex-direction: row;
     justify-content: center;
     text-align: center;
+    line-height: 1.2em;
 }
 
 #home-icons a {
@@ -221,6 +222,12 @@ a:hover {
     background-size: contain;
     min-width: 5em;
     min-height: 5em;
+}
+
+.home-icon-text {
+    font-family: "Merriweather-Italic";
+    font-size: 0.8em;
+    color: #744203;
 }
 
 footer {
@@ -259,6 +266,10 @@ footer {
 
     #home-icons a {
         color: #ccc;
+    }
+
+    .home-icon-text {
+        color: #9d6a15;
     }
 
     #site-header {
