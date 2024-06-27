@@ -9,11 +9,14 @@ date: 2023-06-22T19:20:42+00:00
 
 ---
 
-I have both 2.4 and 5 GHz networks running in my home. I have found that my personal laptop has a _really_ hard time scanning for / connecting to 2.4 GHz networks. It'll eventually connect, but it takes up to a few minutes to find the 2.4 GHz network and work out a connection.
+I have both 2.4 and 5 GHz networks running in my home. I have found that my personal laptop has
+a _really_ hard time scanning for / connecting to 2.4 GHz networks. It'll eventually connect, but
+it takes up to a few minutes to find the 2.4 GHz network and work out a connection.
 
 I got tired of it and started searching the Interwebz.
 
-At some point in my web searches, I learned that I'm running an Intel wireless network card using the built-in Linux kernel `iwlwifi` driver. _Here's partial output of `lspci -k`:_
+At some point in my web searches, I learned that I'm running an Intel wireless network card using
+the built-in Linux kernel `iwlwifi` driver. _Here's partial output of `lspci -k`:_
 
 ```
 02:00.0 Network controller: Intel Corporation Wireless 8265 / 8275 (rev 78)
@@ -22,7 +25,8 @@ At some point in my web searches, I learned that I'm running an Intel wireless n
     Kernel modules: iwlwifi
 ```
 
-I also learned about the various config parameters for this driver. _Here's partial output of `modinfo iwlwifi`:_
+I also learned about the various config parameters for this driver. _Here's partial output of
+`modinfo iwlwifi`:_
 
 ```
 parm:           swcrypto:using crypto in software (default 0 [hardware]) (int)
@@ -42,13 +46,17 @@ parm:           disable_11ax:Disable HE capabilities (default: false) (bool)
 parm:           disable_11be:Disable EHT capabilities (default: false) (bool)
 ```
 
-Well hey, what's this `bt_coex_active:enable wifi/bt co-exist` business? Some web searching led me to [this very old SuperUser answer](https://superuser.com/a/1118989):
+Well hey, what's this `bt_coex_active:enable wifi/bt co-exist` business? Some web searching led me
+to [this very old SuperUser answer](https://superuser.com/a/1118989):
 
-> The 2.4 GHz Wifi band and bluetooth spectrums have a great deal of overlap and can conflict with each other
+> The 2.4 GHz Wifi band and bluetooth spectrums have a great deal of overlap and can conflict with
+> each other
 
-So apparently you can configure your driver to not allow Bluetooth and 2.4 GHz WiFi to be activated simultaneously, which can be important because their operating frequencies overlap.
+So apparently you can configure your driver to not allow Bluetooth and 2.4 GHz WiFi to be activated
+simultaneously, which can be important because their operating frequencies overlap.
 
-I don't use (or like) Bluetooth anyway, so instead of messing with my driver, I just decided to turn Bluetooth off permanently.
+I don't use (or like) Bluetooth anyway, so instead of messing with my driver, I just decided to turn
+Bluetooth off permanently.
 
 ```
 sudo systemctl disable --now bluetooth
