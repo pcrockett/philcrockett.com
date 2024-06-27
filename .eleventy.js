@@ -2,12 +2,31 @@ const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
 const markdownItFootnote = require('markdown-it-footnote');
 
+function trimAngleBrackets(url) {
+    let begin = 0
+    let end = url.length
+    if (url[begin] === "<") {
+        begin = 1
+    }
+    if (url[end - 1] === ">") {
+        end = end - 1
+    }
+    if (begin >= end) {
+        throw Error("Empty url")
+    }
+    return url.slice(begin, end)
+}
+
 const shortcodes = {
     newTabLink: (title, url) => {
         if (typeof url !== "string") {
             // The title _is_ the URL
             url = title;
         }
+        if (url.length === 0) {
+            throw Error("Empty url")
+        }
+        url = trimAngleBrackets(url)
         return `<a href="${url}" target="_blank" rel="noopener">${title}</a>`;
     },
 
