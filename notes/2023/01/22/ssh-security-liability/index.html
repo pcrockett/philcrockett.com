@@ -37,9 +37,9 @@
         
 <small><em>Published on 2023-01-22</em></small>
 
-<p>SSH is pretty handy. As a hobbyist who actually <em>enjoys</em> managing a few Linux boxes, I use it all the time. However I
-can’t shake the feeling that it’s one of the largest security liabilities out there for a server administrator, despite
-the fact that the first S in SSH stands for “secure.”</p>
+<p>SSH is pretty handy. As a hobbyist who actually <em>enjoys</em> managing a few Linux boxes, I use it all
+the time. However I can’t shake the feeling that it’s one of the largest security liabilities out
+there for a server administrator, despite the fact that the first S in SSH stands for “secure.”</p>
 <p>It has too much in common with projects like <a href="https://latacora.micro.blog/2019/07/16/the-pgp-problem.html">PGP / GPG</a> and OpenVPN, which:</p>
 <ul>
 <li>were designed a <em>long</em> time ago</li>
@@ -47,30 +47,35 @@ the fact that the first S in SSH stands for “secure.”</p>
 <li>are difficult to understand, configure, and use correctly</li>
 <li>make it really difficult to <a href="https://blog.codinghorror.com/falling-into-the-pit-of-success/">fall into the pit of success</a></li>
 </ul>
-<p>After all, if you need <a href="https://github.com/jtesta/ssh-audit">configuration auditing software</a> and a myriad of “hardening” guides on the Internet,
-then it just might be too complex.</p>
+<p>After all, if you need <a href="https://github.com/jtesta/ssh-audit">configuration auditing software</a> and a myriad of “hardening” guides
+on the Internet, then it just might be too complex.</p>
 <h2 id="learning-from-wireguard" tabindex="-1">Learning From WireGuard</h2>
-<p>I’m not aware of any widely-used alternatives that are secure. But if the <a href="https://www.wireguard.com/">WireGuard</a> developers ever come up with
-something, it’ll probably be exactly what I’m looking for.</p>
+<p>I’m not aware of any widely-used alternatives that are secure. But if the <a href="https://www.wireguard.com/">WireGuard</a> developers
+ever come up with something, it’ll probably be exactly what I’m looking for.</p>
 <blockquote>
-<p>WireGuard has been designed with ease-of-implementation and simplicity in mind. It is meant to be easily implemented
-in very few lines of code, and easily auditable for security vulnerabilities.</p>
+<p>WireGuard has been designed with ease-of-implementation and simplicity in mind. It is meant to be
+easily implemented in very few lines of code, and easily auditable for security vulnerabilities.</p>
 </blockquote>
-<p>A great example of this is how WireGuard approaches versioning, which is exactly the opposite of PGP, OpenVPN, and SSH:</p>
+<p>A great example of this is how WireGuard approaches versioning, which is exactly the opposite of
+PGP, OpenVPN, and SSH:</p>
 <blockquote>
-<p>WireGuard restricts the options for implementing cryptographic controls, limits the choices for key exchange
-processes, and maps algorithms to a small subset of modern cryptographic primitives. If a flaw is found in any of the
-primitives, a new version can be released that resolves the issue.</p>
+<p>WireGuard restricts the options for implementing cryptographic controls, limits the choices for
+key exchange processes, and maps algorithms to a small subset of modern cryptographic primitives.
+If a flaw is found in any of the primitives, a new version can be released that resolves the
+issue.</p>
 </blockquote>
 <p><small><a href="https://en.wikipedia.org/wiki/WireGuard">From Wikipedia</a></small></p>
 <h2 id="what-i-do" tabindex="-1">What I Do</h2>
-<p>I don’t bother with SSH configuration on my servers anymore. Instead, I rely on <a href="https://tailscale.com/">Tailscale</a> (which uses WireGuard)
-to connect to my servers. My firewall only allows SSH access via the Tailscale interface. At this point I could <em>almost</em>
-discard SSH entirely and use <a href="https://en.wikipedia.org/wiki/Telnet">Telnet</a> instead (though I don’t).</p>
-<p>Of course I have the luxury of being a self-hosted hobbyist, so I don’t have a very complex threat model, and this works
-well for me. I doubt if the same strategy would be feasible for someone who needed to <a href="https://goteleport.com/blog/how-uber-netflix-facebook-do-ssh/">manage a bunch of servers at scale</a>.</p>
-<p>I do suspect we would all be better off if we separated concerns a bit more: Use a simple VPN or similar service for
-establishing a secure tunnel, and use a <em>separate</em> system for interacting with the server through the tunnel.</p>
+<p>I don’t bother with SSH configuration on my servers anymore. Instead, I rely on <a href="https://tailscale.com/">Tailscale</a>
+(which uses WireGuard) to connect to my servers. My firewall only allows SSH access via the
+Tailscale interface. At this point I could <em>almost</em> discard SSH entirely and use <a href="https://en.wikipedia.org/wiki/Telnet">Telnet</a>
+instead (though I don’t).</p>
+<p>Of course I have the luxury of being a self-hosted hobbyist, so I don’t have a very complex threat
+model, and this works well for me. I doubt if the same strategy would be feasible for someone who
+needed to <a href="https://goteleport.com/blog/how-uber-netflix-facebook-do-ssh/">manage a bunch of servers at scale</a>.</p>
+<p>I do suspect we would all be better off if we separated concerns a bit more: Use a simple VPN or
+similar service for establishing a secure tunnel, and use a <em>separate</em> system for interacting with
+the server through the tunnel.</p>
 <h2 id="comments%3F" tabindex="-1">Comments?</h2>
 <p>If you have a <a href="https://joinmastodon.org/" target="_blank" rel="noopener">Mastodon</a> account, you can reply to <a href="https://fosstodon.org/@pcrock/109732805093391136">my post on Mastodon</a>.</p>
 
