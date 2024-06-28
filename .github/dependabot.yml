@@ -6,7 +6,8 @@ updates:
       interval: "monthly"
     groups:
       everything:
-        patterns: "*"
+        patterns:
+          - "*"
 
   - package-ecosystem: "github-actions"
     directory: "/"
