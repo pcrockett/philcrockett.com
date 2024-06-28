@@ -40,15 +40,19 @@
 <hr>
 <p><strong>tl;dr:</strong> Bluetooth and 2.4 GHz WiFi don’t play nicely together. Here’s how I figured it out.</p>
 <hr>
-<p>I have both 2.4 and 5 GHz networks running in my home. I have found that my personal laptop has a <em>really</em> hard time scanning for / connecting to 2.4 GHz networks. It’ll eventually connect, but it takes up to a few minutes to find the 2.4 GHz network and work out a connection.</p>
+<p>I have both 2.4 and 5 GHz networks running in my home. I have found that my personal laptop has
+a <em>really</em> hard time scanning for / connecting to 2.4 GHz networks. It’ll eventually connect, but
+it takes up to a few minutes to find the 2.4 GHz network and work out a connection.</p>
 <p>I got tired of it and started searching the Interwebz.</p>
-<p>At some point in my web searches, I learned that I’m running an Intel wireless network card using the built-in Linux kernel <code>iwlwifi</code> driver. <em>Here’s partial output of <code>lspci -k</code>:</em></p>
+<p>At some point in my web searches, I learned that I’m running an Intel wireless network card using
+the built-in Linux kernel <code>iwlwifi</code> driver. <em>Here’s partial output of <code>lspci -k</code>:</em></p>
 <pre><code>02:00.0 Network controller: Intel Corporation Wireless 8265 / 8275 (rev 78)
     Subsystem: Intel Corporation Wireless 8265 / 8275
     Kernel driver in use: iwlwifi
     Kernel modules: iwlwifi
 </code></pre>
-<p>I also learned about the various config parameters for this driver. <em>Here’s partial output of <code>modinfo iwlwifi</code>:</em></p>
+<p>I also learned about the various config parameters for this driver. <em>Here’s partial output of
+<code>modinfo iwlwifi</code>:</em></p>
 <pre><code>parm:           swcrypto:using crypto in software (default 0 [hardware]) (int)
 parm:           11n_disable:disable 11n functionality, bitmap: 1: full, 2: disable agg TX, 4: disable agg RX, 8 enable agg TX (uint)
 parm:           amsdu_size:amsdu size 0: 12K for multi Rx queue devices, 2K for AX210 devices, 4K for other devices 1:4K 2:8K 3:12K (16K buffers) 4: 2K (default 0) (int)
@@ -65,12 +69,16 @@ parm:           remove_when_gone:Remove dev from PCIe bus if it is deemed inacce
 parm:           disable_11ax:Disable HE capabilities (default: false) (bool)
 parm:           disable_11be:Disable EHT capabilities (default: false) (bool)
 </code></pre>
-<p>Well hey, what’s this <code>bt_coex_active:enable wifi/bt co-exist</code> business? Some web searching led me to <a href="https://superuser.com/a/1118989">this very old SuperUser answer</a>:</p>
+<p>Well hey, what’s this <code>bt_coex_active:enable wifi/bt co-exist</code> business? Some web searching led me
+to <a href="https://superuser.com/a/1118989">this very old SuperUser answer</a>:</p>
 <blockquote>
-<p>The 2.4 GHz Wifi band and bluetooth spectrums have a great deal of overlap and can conflict with each other</p>
+<p>The 2.4 GHz Wifi band and bluetooth spectrums have a great deal of overlap and can conflict with
+each other</p>
 </blockquote>
-<p>So apparently you can configure your driver to not allow Bluetooth and 2.4 GHz WiFi to be activated simultaneously, which can be important because their operating frequencies overlap.</p>
-<p>I don’t use (or like) Bluetooth anyway, so instead of messing with my driver, I just decided to turn Bluetooth off permanently.</p>
+<p>So apparently you can configure your driver to not allow Bluetooth and 2.4 GHz WiFi to be activated
+simultaneously, which can be important because their operating frequencies overlap.</p>
+<p>I don’t use (or like) Bluetooth anyway, so instead of messing with my driver, I just decided to turn
+Bluetooth off permanently.</p>
 <pre><code>sudo systemctl disable --now bluetooth
 </code></pre>
 <p>Problem solved.</p>
