@@ -2,6 +2,10 @@
 #
 # Create a draft note in the .gitignore'd drafts directory.
 #
+# Example usage:
+#
+#     draft <draft_slug>
+#
 # Use the `note` script to promote / publish the draft.
 #
 set -Eeuo pipefail

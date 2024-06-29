@@ -2,6 +2,10 @@
 #
 # Promote a previously-created draft to a note and add it to the repository.
 #
+# Example usage:
+#
+#     note <draft_file_path>
+#
 # See `draft` script for context.
 #
 set -Eeuo pipefail
