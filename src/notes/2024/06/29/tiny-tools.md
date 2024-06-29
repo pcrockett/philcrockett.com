@@ -35,9 +35,9 @@ So for everything else, there's...
 ## Bash? srsly?
 
 I never thought I would say this, but Bash is actually _really fun_. I've gotten quite good at it.
-Don't get me wrong: It is a terrible, horrible, no-good language depending on what you're trying to
-accomplish. But it is still incredibly good at gluing bigger programs together in interesting ways
-with very few lines of code.
+Don't get me wrong: It is a terrible, horrible, no-good language for _a lot_ of use cases. But it
+is still incredibly good at gluing bigger programs together in interesting ways with very few lines
+of code.
 
 It's also _shippable_ -- I can publish Bash scripts with an open source license, and other people
 might actually benefit from them. I've developed a certain style in writing Bash that makes the
