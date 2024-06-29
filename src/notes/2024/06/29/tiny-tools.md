@@ -52,3 +52,5 @@ I'm trying to keep these posts short, and my son is starting to wake up. I'm gon
 him. Perhaps later I'll write a followup post about some of my Bash projects (which are mostly
 published on GitHub) and some of the tools I find to be indispensable for making nice CLIs and
 TUIs.
+
+{% mastodonCommentsSection "<https://fosstodon.org/deck/@pcrock/112698356732753269>" %}
