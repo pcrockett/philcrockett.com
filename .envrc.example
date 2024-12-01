@@ -3,6 +3,6 @@ strict_env
 
 use asdf
 
-export EDITOR=slime
+export EDITOR=hx
 PATH_add bin
 
