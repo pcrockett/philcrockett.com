@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <title>Phil Crockett - Notes</title>
+        <title>Phil Crockett - Tiny Tools: fztotp</title>
         
         <link href="/assets/style.css" rel="stylesheet">
         <link rel="apple-touch-icon" sizes="57x57" href="/favicon-57x57.png">
@@ -32,11 +32,56 @@
     <body>
         <div id="content">
     
-    <h1>Notes</h1>
+    <h1>Tiny Tools: fztotp</h1>
     
     <section>
         
-<ul><li><a href="/notes/2025/02/23/tiny-tools-fztotp/">Tiny Tools: fztotp</a> — 2025-02-23</li><li><a href="/notes/2025/02/01/fosdem-noob-tips/">FOSDEM N00b Tips</a> — 2025-02-03</li><li><a href="/notes/2024/06/29/tiny-tools/">Tiny Tools</a> — 2024-06-29</li><li><a href="/notes/2023/06/22/wifi-trouble-disable-bluetooth/">2.4 GHz WiFi Trouble? Disable Bluetooth.</a> — 2023-06-22</li><li><a href="/notes/2023/01/22/ssh-security-liability/">SSH: Security Liability?</a> — 2023-01-22</li><li><a href="/notes/2022/12/27/trying-ocaml/">Trying OCaml</a> — 2022-12-27</li><li><a href="/notes/2022/12/17/dream-programming-language/">My Dream Programming Language</a> — 2022-12-17</li><li><a href="/notes/2022/11/07/">What is this?</a> — 2022-11-07</li></ul>
+<small><em>Published on 2025-02-23</em></small>
+
+<p><em>This is my first <a href="/notes/2024/06/29/tiny-tools/">Tiny Tools</a> post.</em></p>
+<p><code>fztotp</code> (“fuzzy TOTP”) is a relatively simple tool built on top of
+<a href="https://github.com/junegunn/fzf" target="_blank" rel="noopener"><code>fzf</code></a>
+(as are all of my most useful scripts) and
+<a href="https://docs.yubico.com/software/yubikey/tools/ykman/intro.html" target="_blank" rel="noopener"><code>ykman</code></a>.
+I’m a little biased, but this is the best
+<a href="https://en.wikipedia.org/wiki/Time-based_one-time_password" target="_blank" rel="noopener">TOTP</a>
+authenticator app I have ever used (though only if you have a
+<a href="https://www.yubico.com/" target="_blank" rel="noopener">Yubikey</a>).</p>
+<p>You can find the script
+<a href="https://github.com/pcrockett/rush-repo/blob/main/fztotp/fztotp" target="_blank" rel="noopener">on GitHub</a>.</p>
+<p>Its job is quite simple:</p>
+<ol>
+<li>Show the list of TOTP auth credentials you have stored in your Yubikey, in an <code>fzf</code>
+user interface</li>
+<li>allow the user to fuzzy-select one of the credentials in the list, and then</li>
+<li>copy the TOTP code for that site to your clipboard (if you have
+<a href="https://github.com/kfish/xsel" target="_blank" rel="noopener"><code>xsel</code></a> installed).</li>
+</ol>
+<p>This enables me to get through multi-factor auth dialogs in just a few keystrokes. All
+with just ~50 lines of code.</p>
+<p>If you have <code>fzf</code> and <code>ykman</code> installed already, you can install <code>fztotp</code> on a Linux
+machine with:</p>
+<pre><code class="language-bash">curl -SsfL https://philcrockett.com/yolo/v1.sh \
+    | bash -s -- fztotp
+</code></pre>
+
+
+
+
+
+
+<section>
+<h2>Other Posts</h2>
+<ul>
+
+
+
+    <li>Previous: <a href="/notes/2025/02/01/fosdem-noob-tips/">FOSDEM N00b Tips</a> — 2025-02-03</li>
+
+</ul>
+</section>
+
+
     </section>
 </div>
 <footer class="stay-above-header">
