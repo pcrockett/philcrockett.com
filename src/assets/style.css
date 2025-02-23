@@ -119,6 +119,13 @@ p code {
     border-radius: 0.2em;
 }
 
+li code {
+    padding: 0.2em;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    border-radius: 0.2em;
+}
+
 pre {
     border-radius: 0.2em;
     overflow-y: scroll;
@@ -159,6 +166,16 @@ header a {
 
 a {
     text-decoration: none;
+    color: #744203;
+}
+
+code a {
+    text-decoration: underline;
+    color: #744203;
+}
+
+a code {
+    text-decoration: underline;
     color: #744203;
 }
 
@@ -258,6 +275,16 @@ footer {
 
     a {
         color: #9d6a15;
+    }
+
+    code a {
+        text-decoration: underline;
+        color: #c48e36;
+    }
+
+    a code {
+        text-decoration: underline;
+        color: #c48e36;
     }
 
     a:hover {
