@@ -35,3 +35,5 @@ machine with:
 curl -SsfL https://philcrockett.com/yolo/v1.sh \
     | bash -s -- fztotp
 ```
+
+{% mastodonCommentsSection "<https://fosstodon.org/@pcrock/114058031613011373>" %}
