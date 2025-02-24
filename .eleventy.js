@@ -34,7 +34,7 @@ const shortcodes = {
         // For use in Markdown only. Generates a standard comments section at the end of a note with a post URL.
         const mastodonLink = shortcodes.newTabLink("Mastodon", "https://joinmastodon.org/");
         const postLink = shortcodes.newTabLink("my post on the Fediverse", url);
-        return `## Comments?\n\nIf you have a ${mastodonLink} account, you can reply to ${postLink}`;
+        return `## Comments?\n\nIf you have a ${mastodonLink} account, you can reply to ${postLink}.`;
     }
 };
 
