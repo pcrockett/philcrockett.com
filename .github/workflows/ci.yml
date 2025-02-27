@@ -14,9 +14,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Install asdf & tools
-      uses: asdf-vm/actions/install@v3
-    - name: npm install
-      run: npm install
-    - name: Lint
-      run: npm run remark-lint
+    - run: make devenv-ci
