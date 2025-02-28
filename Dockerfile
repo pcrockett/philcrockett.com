@@ -1,9 +1,9 @@
 FROM docker.io/library/debian:12-slim
 ARG DEBIAN_FRONTEND=noninteractive
-ARG USERNAME=root
-ARG UID=0
-ARG GID=0
-ARG HOME="/root"
+ARG USERNAME=user
+ARG UID=1000
+ARG GID=1000
+ARG HOME="/home/user"
 
 # don't need to pin apt package versions
 # hadolint ignore=DL3008
@@ -12,14 +12,14 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
 rm -f /etc/apt/apt.conf.d/docker-clean && \
 apt-get update && \
 apt-get install --yes --no-install-recommends curl ca-certificates git make && \
-test "${UID}" -eq 0 || groupadd --gid "${GID}" "${USERNAME}" && \
-test "${UID}" -eq 0 || useradd --create-home --uid "${UID}" --gid "${GID}" "${USERNAME}" && \
+groupadd --gid "${GID}" "${USERNAME}" && \
+useradd --create-home --uid "${UID}" --gid "${GID}" "${USERNAME}" && \
 mkdir /app && \
 chown -R "${USERNAME}:${USERNAME}" /app
 
 USER ${USERNAME}
 WORKDIR /app
-COPY .tool-versions package.json package-lock.json .
+COPY .tool-versions .
 
 ENV HOME="${HOME}"
 ENV ASDF_DIR="${HOME}/.asdf"
