@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+if [ "$(git status --short)" ]; then
+    echo "The working directory is dirty. Commit or stash any pending changes."
+    exit 1
+fi
