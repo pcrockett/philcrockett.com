@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - run: git fetch
     - run: make worktree devenv-ci
     - name: Ensure site contents haven't changed
       run: cd _site && ../bin/dirty-check
