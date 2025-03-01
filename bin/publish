@@ -34,7 +34,7 @@ echo "Removing existing files"
 rm --recursive --force "${SITE_DIR:?}"/*
 
 echo "Generating site"
-npm run build
+make build
 
 echo "Updating ${PUBLISH_BRANCH} branch"
 cd "${SITE_DIR}"

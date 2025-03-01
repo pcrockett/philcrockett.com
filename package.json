@@ -3,13 +3,6 @@
   "version": "1.0.0",
   "description": "My personal website",
   "main": "index.js",
-  "scripts": {
-    "build": "npx @11ty/eleventy",
-    "serve": "npx @11ty/eleventy --serve",
-    "clean": "rm --recursive --force _site",
-    "remark-lint": "remark . --frail --quiet",
-    "remark-format": "bin/md-format"
-  },
   "author": "Philip Crockett",
   "license": "CC BY-SA 4.0",
   "devDependencies": {
