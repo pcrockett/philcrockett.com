@@ -13,7 +13,13 @@ set -Eeuo pipefail
 #   pre-commit, you probably only want to set this to "*" (none), but during editing, "AM"
 #
 
-VERBOSE="${VERBOSE:-false}"
+init() {
+    VERBOSE="${VERBOSE:-false}"
+    THIS_SCRIPT="$(readlink -f "${0}")"
+    BIN_DIR="$(dirname "${THIS_SCRIPT}")"
+    REPO_DIR="$(dirname "${BIN_DIR}")"
+    PATH="${REPO_DIR}/node_modules/.bin:${PATH}"
+}
 
 log_verbose() {
     test "${VERBOSE}" == "false" || echo "${*}"
@@ -30,6 +36,7 @@ markdown_files() {
 }
 
 main() {
+    init
     local error_files=()
     while read -r file; do
         format_file "${file}" || error_files+=("${file}")

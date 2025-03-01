@@ -2,11 +2,34 @@ IMG_NAME ?= website-env
 UID ?= $(shell id -u)
 GID ?= $(shell id -g)
 
-ci:
-	npm ci --prefer-offline
-	npm run remark-lint
-	npm run build
+ci: lint build
 .PHONY: ci
+
+build: deps
+	./node_modules/.bin/eleventy
+.PHONY: build
+
+serve: deps
+	./node_modules/.bin/eleventy --serve
+.PHONY: serve
+
+clean:
+	rm -rf _site
+.PHONY: clean
+
+lint: deps
+	./node_modules/.bin/remark . --frail --quiet
+.PHONY: lint
+
+format: deps
+	./bin/md-format
+.PHONY: format
+
+deps: node_modules/.bin/eleventy
+.PHONY: deps
+
+node_modules/.bin/eleventy: package.json package-lock.json
+	npm ci --prefer-offline
 
 devenv-ci: devenv-build
 	docker run --rm \
