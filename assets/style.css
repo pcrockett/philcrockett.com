@@ -167,20 +167,30 @@ header a {
 
 a {
     text-decoration: none;
-    color: #744203;
+    color: #794400;
 }
 
 code a {
     text-decoration: underline;
-    color: #744203;
+    color: #b56600;
 }
 
 a code {
     text-decoration: underline;
-    color: #744203;
+    color: #b56600;
 }
 
 a:hover {
+    color: #000;
+}
+
+a:hover code {
+    text-decoration: underline;
+    color: #000;
+}
+
+code a:hover {
+    text-decoration: underline;
     color: #000;
 }
 
@@ -245,7 +255,7 @@ a:hover {
 .home-icon-text {
     font-family: "Merriweather-Italic";
     font-size: 0.8em;
-    color: #744203;
+    color: #794400;
 }
 
 footer {
@@ -275,7 +285,7 @@ footer {
     }
 
     a {
-        color: #9d6a15;
+        color: #c48e36;
     }
 
     code a {
@@ -292,12 +302,22 @@ footer {
         color: #fff;
     }
 
+    a:hover code {
+        text-decoration: underline;
+        color: #fff;
+    }
+
+    code a:hover {
+        text-decoration: underline;
+        color: #fff;
+    }
+
     #home-icons a {
         color: #ccc;
     }
 
     .home-icon-text {
-        color: #9d6a15;
+        color: #c48e36;
     }
 
     #site-header {
