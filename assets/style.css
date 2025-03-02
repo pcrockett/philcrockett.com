@@ -152,7 +152,8 @@ pre code {
 }
 
 #site-header nav {
-    display: inline-block;
+    text-wrap: nowrap;
+    overflow-x: auto;
 }
 
 #site-header a {
