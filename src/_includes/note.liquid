@@ -2,7 +2,11 @@
 layout: layout.liquid
 ---
 
-<small><em>Published on {{ page.date | date: "%Y-%m-%d" }}</em></small>
+<small><em>Originally published on {{ page.date | date: "%Y-%m-%d" }}</em></small>
+
+{% if lastUpdated %}
+<br><small><em>Last updated on {{ lastUpdated | date: "%Y-%m-%d" }}</em></small>
+{% endif %}
 
 {{ content }}
 
