@@ -5,6 +5,12 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ "**" ]
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
+      - unlabeled
 
 permissions:
   contents: read
@@ -16,5 +22,14 @@ jobs:
     - uses: actions/checkout@v4
     - run: git fetch
     - run: make worktree devenv-ci
+    - name: Output website content diff to logs
+      run: cd _site && git diff
+
+    # it's ok if we push content to master without changing gh-pages.
+    # however if this is just a dependency update, let's do a check
+    # to make sure the dependency didn't change any website output.
+    #
+    # thanks <https://stackoverflow.com/a/59588725/138757>
     - name: Ensure site contents haven't changed
+      if: contains(github.event.pull_request.labels.*.name, 'dependencies')
       run: cd _site && ../bin/dirty-check
