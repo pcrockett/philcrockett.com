@@ -11,8 +11,10 @@ keeping up with it or finding things to write. Instead, I hope to keep this all 
 small and informal. It's just a place to quickly dump my thoughts.
 
 <!-- lint disable maximum-line-length -->
+
 Sure, I'll use this to {% newTabLink "write about what I've struggled with" "<https://jvns.ca/blog/2021/05/24/blog-about-what-you-ve-struggled-with/>" %},
 or maybe I'll turn it into a sort of {% newTabLink "Zettelkasten" "<https://en.wikipedia.org/wiki/Zettelkasten>" %}.
 In any case, I **do not** guarantee that these pages will stay around long-term or
 remain immutable. I will edit or prune them whenever I feel like it.
+
 <!-- lint enable maximum-line-length -->
