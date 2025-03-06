@@ -39,25 +39,22 @@
 <small><em>Originally published on 2025-02-23</em></small>
 
 
+<br><small><em>Last updated on 2025-03-06</em></small>
+
 
 <p><em>This is my first <a href="/notes/2024/06/29/tiny-tools/">Tiny Tools</a> post.</em></p>
-<p><code>fztotp</code> (“fuzzy TOTP”) is a relatively simple tool built on top of
-<a href="https://github.com/junegunn/fzf" target="_blank" rel="noopener"><code>fzf</code></a>
-(as are all of my most useful scripts) and
-<a href="https://docs.yubico.com/software/yubikey/tools/ykman/intro.html" target="_blank" rel="noopener"><code>ykman</code></a>.
-I’m a little biased, but this is the best
-<a href="https://en.wikipedia.org/wiki/Time-based_one-time_password" target="_blank" rel="noopener">TOTP</a>
-authenticator app I have ever used (though only if you have a
-<a href="https://www.yubico.com/" target="_blank" rel="noopener">Yubikey</a>).</p>
-<p>You can find the script
-<a href="https://github.com/pcrockett/rush-repo/blob/main/fztotp/fztotp" target="_blank" rel="noopener">on GitHub</a>.</p>
+<p><code>fztotp</code> (“fuzzy TOTP”) is a relatively simple tool built on top of <a href="https://github.com/junegunn/fzf"><code>fzf</code></a> (as
+are all of my most useful scripts) and <a href="https://docs.yubico.com/software/yubikey/tools/ykman/intro.html"><code>ykman</code></a>. I’m a little biased, but
+this is the best <a href="https://en.wikipedia.org/wiki/Time-based_one-time_password">TOTP</a> authenticator app I have ever used (though it’s only for
+<a href="https://www.yubico.com/">Yubikey</a>).</p>
+<p>You can find the script <a href="https://github.com/pcrockett/rush-repo/blob/main/fztotp/fztotp">on GitHub</a>.</p>
 <p>Its job is quite simple:</p>
 <ol>
 <li>Show the list of TOTP auth credentials you have stored in your Yubikey, in an <code>fzf</code>
 user interface</li>
 <li>allow the user to fuzzy-select one of the credentials in the list, and then</li>
 <li>copy the TOTP code for that site to your clipboard (if you have
-<a href="https://github.com/kfish/xsel" target="_blank" rel="noopener"><code>xsel</code></a> installed).</li>
+<a href="https://github.com/kfish/xsel"><code>xsel</code></a> installed).</li>
 </ol>
 <p>This enables me to get through multi-factor auth dialogs in just a few keystrokes. All
 with just ~50 lines of code.</p>
@@ -67,7 +64,7 @@ machine with:</p>
     | bash -s -- fztotp
 </code></pre>
 <h2 id="comments%3F" tabindex="-1">Comments?</h2>
-<p>If you have a <a href="https://joinmastodon.org/" target="_blank" rel="noopener">Mastodon</a> account, you can reply to <a href="https://fosstodon.org/@pcrock/114058031613011373" target="_blank" rel="noopener">my post on the Fediverse</a>.</p>
+<p>If you have a <a href="https://joinmastodon.org/">Mastodon</a> account, you can reply to <a href="https://fosstodon.org/@pcrock/114058031613011373">my post on the Fediverse</a>.</p>
 
 
 
