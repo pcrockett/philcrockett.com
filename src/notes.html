@@ -7,6 +7,7 @@ pagination:
   reverse: true
 ---
 
+<small><em>I also have an <a href="/feed.xml">RSS feed</a>.</em></small>
 <ul>
     {%- for note in pagination.items -%}
     <li><a href="{{ note.url }}">{{ note.data.title }}</a> — {{ note.data.date | date: "%Y-%m-%d" }}</li>
