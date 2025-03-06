@@ -35,12 +35,16 @@ markdown_files() {
     find src -type f -name '*.md'
 }
 
+ignore() {
+    grep --invert-match --fixed-strings "${1}"
+}
+
 main() {
     init
     local error_files=()
     while read -r file; do
         format_file "${file}" || error_files+=("${file}")
-    done < <(markdown_files)
+    done < <(markdown_files | ignore contact.md)
     if [ "${#error_files[@]}" -gt 0 ]; then
         echo
         echo "Files with warnings / errors:"
