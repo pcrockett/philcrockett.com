@@ -1,6 +1,7 @@
 ---
 title: "Tiny Tools: fztotp"
 date: 2025-02-23T18:32:10+00:00
+lastUpdated: 2025-03-06
 ---
 
 _This is my first [Tiny Tools](/notes/2024/06/29/tiny-tools/) post._
