@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:base="https://philcrockett.com/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Phil&#39;s Notes</title>
+    <link>https://philcrockett.com/</link>
+    <atom:link href="https://philcrockett.com/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Notes from my definitely-not-a-blog</description>
+    <language>en</language>
+    <item>
+      <title>Kudos to the Fish Devs</title>
+      <link>https://philcrockett.com/notes/2025/03/04/fish-kudos/</link>
+      <description>&lt;p&gt;Just look at &lt;a href=&quot;https://github.com/fish-shell/fish-shell/releases/tag/4.0.0&quot;&gt;this monumental feat&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I gotta say, the dev team behind fish really seems to know how to dev. They:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;pulled off a rewrite&lt;/li&gt;
+&lt;li&gt;care enough about their users to…
+&lt;ul&gt;
+&lt;li&gt;keep track of breaking changes and communicate them in great detail&lt;/li&gt;
+&lt;li&gt;understand when to break things vs deprecate them&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;value POSIX compatibility while at the same time not allowing POSIX to ruin their
+project&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;etc.&lt;/p&gt;
+&lt;p&gt;Of course we’ll see for sure how well it turns out after a few point releases, but so
+far at least, it seems like they deserve a standing ovation. I wonder how old they are,
+because it looks to me like they have a lot of hard-won experience and discernment.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2025/03/04/fish-kudos/#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h2 id=&quot;footnotes&quot;&gt;Footnotes&lt;/h2&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;I originally posted this on a &lt;a href=&quot;https://lobste.rs/s/ym7xhm/release_fish_shell_4_0_0_now_ported_rust#c_qavfls&quot;&gt;lobste.rs thread&lt;/a&gt;. However lately I have
+started wanting to “own my words,” so I decided to duplicate the post here. &lt;a href=&quot;https://philcrockett.com/notes/2025/03/04/fish-kudos/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+      <pubDate>Tue, 04 Mar 2025 21:28:01 GMT</pubDate>
+      <dc:creator>Phil Crockett</dc:creator>
+      <guid>https://philcrockett.com/notes/2025/03/04/fish-kudos/</guid>
+    </item>
+    <item>
+      <title>Tiny Tools: fztotp</title>
+      <link>https://philcrockett.com/notes/2025/02/23/tiny-tools-fztotp/</link>
+      <description>&lt;p&gt;&lt;em&gt;This is my first &lt;a href=&quot;https://philcrockett.com/notes/2024/06/29/tiny-tools/&quot;&gt;Tiny Tools&lt;/a&gt; post.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;fztotp&lt;/code&gt; (“fuzzy TOTP”) is a relatively simple tool built on top of &lt;a href=&quot;https://github.com/junegunn/fzf&quot;&gt;&lt;code&gt;fzf&lt;/code&gt;&lt;/a&gt; (as
+are all of my most useful scripts) and &lt;a href=&quot;https://docs.yubico.com/software/yubikey/tools/ykman/intro.html&quot;&gt;&lt;code&gt;ykman&lt;/code&gt;&lt;/a&gt;. I’m a little biased, but
+this is the best &lt;a href=&quot;https://en.wikipedia.org/wiki/Time-based_one-time_password&quot;&gt;TOTP&lt;/a&gt; authenticator app I have ever used (though it’s only for
+&lt;a href=&quot;https://www.yubico.com/&quot;&gt;Yubikey&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;You can find the script &lt;a href=&quot;https://github.com/pcrockett/rush-repo/blob/main/fztotp/fztotp&quot;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Its job is quite simple:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Show the list of TOTP auth credentials you have stored in your Yubikey, in an &lt;code&gt;fzf&lt;/code&gt;
+user interface&lt;/li&gt;
+&lt;li&gt;allow the user to fuzzy-select one of the credentials in the list, and then&lt;/li&gt;
+&lt;li&gt;copy the TOTP code for that site to your clipboard (if you have
+&lt;a href=&quot;https://github.com/kfish/xsel&quot;&gt;&lt;code&gt;xsel&lt;/code&gt;&lt;/a&gt; installed).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This enables me to get through multi-factor auth dialogs in just a few keystrokes. All
+with just ~50 lines of code.&lt;/p&gt;
+&lt;p&gt;If you have &lt;code&gt;fzf&lt;/code&gt; and &lt;code&gt;ykman&lt;/code&gt; installed already, you can install &lt;code&gt;fztotp&lt;/code&gt; on a Linux
+machine with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;curl -SsfL https://philcrockett.com/yolo/v1.sh &#92;
+    | bash -s -- fztotp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;comments%3F&quot; tabindex=&quot;-1&quot;&gt;Comments?&lt;/h2&gt;
+&lt;p&gt;If you have a &lt;a href=&quot;https://joinmastodon.org/&quot;&gt;Mastodon&lt;/a&gt; account, you can reply to &lt;a href=&quot;https://fosstodon.org/@pcrock/114058031613011373&quot;&gt;my post on the Fediverse&lt;/a&gt;.&lt;/p&gt;
+</description>
+      <pubDate>Sun, 23 Feb 2025 19:32:10 GMT</pubDate>
+      <dc:creator>Phil Crockett</dc:creator>
+      <guid>https://philcrockett.com/notes/2025/02/23/tiny-tools-fztotp/</guid>
+    </item>
+    <item>
+      <title>FOSDEM N00b Tips</title>
+      <link>https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/</link>
+      <description>&lt;p&gt;So this year (2025) was my first year to visit &lt;a href=&quot;https://fosdem.org/&quot;&gt;FOSDEM&lt;/a&gt;. It was
+also my first time in Belgium. I started writing down these tips as I learned them.
+&lt;em&gt;If you are more experienced and you want to correct anything here, please do
+&lt;a href=&quot;https://philcrockett.com/contact/&quot;&gt;let me know&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&quot;preparing-for-fosdem&quot; tabindex=&quot;-1&quot;&gt;Preparing for FOSDEM&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;If you’re an Android person, install
+&lt;a href=&quot;https://f-droid.org/packages/be.digitalia.fosdem/&quot;&gt;FOSDEM Companion&lt;/a&gt;&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt; and start
+bookmarking tracks you’re interested in. That will come in handy on FOSDEM day, trust
+me.&lt;/li&gt;
+&lt;li&gt;If you can, pack your own lunch and bring it with you to the conference. The food
+trucks are ok, but expect to pay 10 EUR for lunch, and the lines get &lt;em&gt;really&lt;/em&gt; long
+around lunchtime.&lt;/li&gt;
+&lt;li&gt;Bring a water bottle and snack while you’re at it.&lt;/li&gt;
+&lt;li&gt;You can pay for pretty much everything you need by card when you get to Brussels, if
+you don’t want to carry much cash. Even the food trucks at FOSDEM accept cards.&lt;/li&gt;
+&lt;li&gt;FOSDEM is a conference with a lot of people packed into small spaces. Bring a face
+mask and hand sanitizer. As they said during the opening talk, “FOSDEM Flu is real.”&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;getting-to-the-conference&quot; tabindex=&quot;-1&quot;&gt;Getting to the conference&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;FOSDEM has a page with instructions to get to the conference, and
+it’s really good high-level information. For the 2025 conference it was
+&lt;a href=&quot;https://fosdem.org/2025/practical/transportation/&quot;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;If you’re coming from the airport, there are kiosks where you can buy train
+tickets&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;. A ticket to the central train station (Bruxelles Centraal) cost me about
+11 EUR.&lt;/li&gt;
+&lt;li&gt;The busses to the university are packed with FOSDEM attendees. If you get hot or
+claustrophobic, take off your coat before you get on the bus. It gets warm and cozy.&lt;/li&gt;
+&lt;li&gt;The easiest way to pay the bus fare is to swipe a bank card on the contactless
+payment doodad thingy. You don’t even need to talk to the bus driver or push any
+buttons. Just swipe your card.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/#fn3&quot; id=&quot;fnref3&quot;&gt;[3]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;at-the-conference&quot; tabindex=&quot;-1&quot;&gt;At the conference&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;If you see a ridiculously long line when you arrive at the university first thing
+in the morning, it’s &lt;strong&gt;not&lt;/strong&gt; for registration.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/#fn4&quot; id=&quot;fnref4&quot;&gt;[4]&lt;/a&gt;&lt;/sup&gt; Instead, it’s probably a line
+for buying t-shirts and hoodies. They are apparently very high-demand, especially
+in the morning because they will run out of certain sizes later. So I &lt;em&gt;do&lt;/em&gt; recommend
+standing in that line… if buying some swag is important to you.&lt;/li&gt;
+&lt;li&gt;The lines for coffee in the morning are long. If you can bring your own, do it. &lt;em&gt;Or
+alternatively use the long lines as an opportunity to get into conversations with
+other fellow nerds.&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Show up at rooms early. They often reach full capacity long before the talk
+starts.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/#fn5&quot; id=&quot;fnref5&quot;&gt;[5]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;li&gt;If you’re interested in a talk that’s being given by a relatively famous person,
+you may need to get into the room for the &lt;em&gt;preceeding talk&lt;/em&gt; &lt;strong&gt;before&lt;/strong&gt; the one you’re
+actually interested in.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/#fn6&quot; id=&quot;fnref6&quot;&gt;[6]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;leaving-brussels&quot; tabindex=&quot;-1&quot;&gt;Leaving Brussels&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;If you’re flying out of Brussels, I saw &lt;strong&gt;one&lt;/strong&gt; place to fill up a water bottle
+for free after you’ve been through security. It’s at gate A43, labelled “free water
+refills.” It’s in an area where there are other signs for overpriced airport food and
+beverages, so it’s easy to miss if you don’t know it’s there.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;other-tips&quot; tabindex=&quot;-1&quot;&gt;Other tips&lt;/h2&gt;
+&lt;p&gt;I’m not the first person to produce content like this on the Internet. A quick search,
+for example, yielded &lt;a href=&quot;https://pothix.com/fosdem-guide/&quot;&gt;this very good first-timer FOSDEM guide&lt;/a&gt;
+which has more useful information. I’m sure there are plenty of others.&lt;/p&gt;
+&lt;h2 id=&quot;footnotes&quot;&gt;Footnotes&lt;/h2&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;FOSDEM recommends this app, and others, on their
+&lt;a href=&quot;https://fosdem.org/2025/schedule/mobile/&quot;&gt;mobile schedule apps page&lt;/a&gt;. &lt;a href=&quot;https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Public transport is a good way to get around, but there are things like taxis as
+well. I’ve never used those, but I bet they’re expensive. &lt;a href=&quot;https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn3&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Concerningly, I don’t actually know how much I paid because it didn’t show me
+a price… &lt;a href=&quot;https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/#fnref3&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn4&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;FOSDEM doesn’t require you to register, check in, or anything like that. &lt;a href=&quot;https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/#fnref4&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn5&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;FOSDEM staff is really good and strict about room capacity. Some rooms allow
+people to stand or sit along the walls when all the seats fill up, but others have
+a strict max capacity that is enforced, and there will be staff at the door to
+prevent people from coming inside when that max capacity has filled up. &lt;a href=&quot;https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/#fnref5&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn6&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;For example, during FOSDEM 2025 most of the people in the Security room just
+stayed in their seats after one particular talk, which means only a handful of
+people in the hallway got in to hear &lt;a href=&quot;https://daniel.haxx.se/&quot;&gt;Daniel Steinberg&lt;/a&gt;
+speak. &lt;a href=&quot;https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/#fnref6&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+      <pubDate>Mon, 03 Feb 2025 10:00:00 GMT</pubDate>
+      <dc:creator>Phil Crockett</dc:creator>
+      <guid>https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/</guid>
+    </item>
+    <item>
+      <title>Tiny Tools</title>
+      <link>https://philcrockett.com/notes/2024/06/29/tiny-tools/</link>
+      <description>&lt;p&gt;A couple years ago I wrote about &lt;a href=&quot;https://philcrockett.com/notes/2022/12/17/dream-programming-language/&quot;&gt;what I want in a programming language&lt;/a&gt;.
+I then decided to &lt;a href=&quot;https://philcrockett.com/notes/2022/12/27/trying-ocaml/&quot;&gt;try OCaml&lt;/a&gt; even though it was missing a few
+important points in my list of requirements for a “dream language.” I never took OCaml much farther
+than an over-engineered Hello World test run, though I did generally enjoy the experience.&lt;/p&gt;
+&lt;p&gt;I was looking for a good load-bearing language – something that scales well, makes a large codebase
+easy &lt;strong&gt;and&lt;/strong&gt; enjoyable to maintain, and which you could use to build big tools or systems with. In
+hindsight, I should have been looking for a language that makes it easy and fun to create &lt;em&gt;tiny
+tools&lt;/em&gt;. Since I have a small child and other priorities, I don’t have too much time or energy to
+build big things, and I’m ok with that.&lt;/p&gt;
+&lt;p&gt;Which is why since then I have mostly been enjoying Bash and Nushell.&lt;/p&gt;
+&lt;h2 id=&quot;nushell&quot; tabindex=&quot;-1&quot;&gt;Nushell&lt;/h2&gt;
+&lt;p&gt;I don’t recommend &lt;a href=&quot;https://www.nushell.sh/&quot;&gt;Nushell&lt;/a&gt; as your day-to-day interactive shell (yet). But
+writing small scripts in Nushell is insanely fun. I like the syntax, type safety, functional style.
+I like the polish around displaying things, parameter parsing, help messages, and JSON parsing. I
+like how it encourages you to create a sort of well-defined data flow and transformation pipeline in
+your scripts.&lt;/p&gt;
+&lt;p&gt;It makes me happy.&lt;/p&gt;
+&lt;p&gt;But I really only use it for personal scripts, because it hasn’t reached a stable 1.0 yet and not
+many people have it installed. I’ve also had trouble using it seriously with programs like
+&lt;a href=&quot;https://github.com/junegunn/fzf&quot;&gt;fzf&lt;/a&gt;, which I also love.&lt;/p&gt;
+&lt;p&gt;So for everything else, there’s…&lt;/p&gt;
+&lt;h2 id=&quot;bash%3F-srsly%3F&quot; tabindex=&quot;-1&quot;&gt;Bash? srsly?&lt;/h2&gt;
+&lt;p&gt;I never thought I would say this, but Bash is actually &lt;em&gt;really fun&lt;/em&gt;. I’ve gotten quite good at it.
+Don’t get me wrong: It is a terrible, horrible, no-good language for &lt;em&gt;a lot&lt;/em&gt; of use cases. But it
+is still incredibly good at gluing bigger programs together in interesting ways with very few lines
+of code.&lt;/p&gt;
+&lt;p&gt;It’s also &lt;em&gt;shippable&lt;/em&gt; – I can publish Bash scripts with an open source license, and other people
+might actually benefit from them. I’ve developed a certain style in writing Bash that makes the
+code surprisingly bearable to read, more robust, and avoids a lot of common landmines.&lt;/p&gt;
+&lt;p&gt;In other words, Bash allows me to leverage other people’s hard work with load-bearing languages to
+solve my own problems using just a few lines of code.&lt;/p&gt;
+&lt;h2 id=&quot;i%E2%80%99ll-write-more&quot; tabindex=&quot;-1&quot;&gt;I’ll write more&lt;/h2&gt;
+&lt;p&gt;I’m trying to keep these posts short, and my son is starting to wake up. I’m gonna go hang out with
+him. Perhaps later I’ll write a followup post about some of my Bash projects (which are mostly
+published on GitHub) and some of the tools I find to be indispensable for making nice CLIs and
+TUIs.&lt;/p&gt;
+&lt;h2 id=&quot;comments%3F&quot; tabindex=&quot;-1&quot;&gt;Comments?&lt;/h2&gt;
+&lt;p&gt;If you have a &lt;a href=&quot;https://joinmastodon.org/&quot;&gt;Mastodon&lt;/a&gt; account, you can reply to &lt;a href=&quot;https://fosstodon.org/deck/@pcrock/112698356732753269&quot;&gt;my post on the Fediverse&lt;/a&gt;.&lt;/p&gt;
+</description>
+      <pubDate>Sat, 29 Jun 2024 07:09:20 GMT</pubDate>
+      <dc:creator>Phil Crockett</dc:creator>
+      <guid>https://philcrockett.com/notes/2024/06/29/tiny-tools/</guid>
+    </item>
+    <item>
+      <title>2.4 GHz WiFi Trouble? Disable Bluetooth.</title>
+      <link>https://philcrockett.com/notes/2023/06/22/wifi-trouble-disable-bluetooth/</link>
+      <description>&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;tl;dr:&lt;/strong&gt; Bluetooth and 2.4 GHz WiFi don’t play nicely together. Here’s how I figured it out.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;I have both 2.4 and 5 GHz networks running in my home. I have found that my personal laptop has
+a &lt;em&gt;really&lt;/em&gt; hard time scanning for / connecting to 2.4 GHz networks. It’ll eventually connect, but
+it takes up to a few minutes to find the 2.4 GHz network and work out a connection.&lt;/p&gt;
+&lt;p&gt;I got tired of it and started searching the Interwebz.&lt;/p&gt;
+&lt;p&gt;At some point in my web searches, I learned that I’m running an Intel wireless network card using
+the built-in Linux kernel &lt;code&gt;iwlwifi&lt;/code&gt; driver. &lt;em&gt;Here’s partial output of &lt;code&gt;lspci -k&lt;/code&gt;:&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;02:00.0 Network controller: Intel Corporation Wireless 8265 / 8275 (rev 78)
+    Subsystem: Intel Corporation Wireless 8265 / 8275
+    Kernel driver in use: iwlwifi
+    Kernel modules: iwlwifi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I also learned about the various config parameters for this driver. &lt;em&gt;Here’s partial output of
+&lt;code&gt;modinfo iwlwifi&lt;/code&gt;:&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;parm:           swcrypto:using crypto in software (default 0 [hardware]) (int)
+parm:           11n_disable:disable 11n functionality, bitmap: 1: full, 2: disable agg TX, 4: disable agg RX, 8 enable agg TX (uint)
+parm:           amsdu_size:amsdu size 0: 12K for multi Rx queue devices, 2K for AX210 devices, 4K for other devices 1:4K 2:8K 3:12K (16K buffers) 4: 2K (default 0) (int)
+parm:           fw_restart:restart firmware in case of error (default true) (bool)
+parm:           nvm_file:NVM file name (charp)
+parm:           uapsd_disable:disable U-APSD functionality bitmap 1: BSS 2: P2P Client (default: 3) (uint)
+parm:           enable_ini:0:disable, 1-15:FW_DBG_PRESET Values, 16:enabled without preset value defined,Debug INI TLV FW debug infrastructure (default: 16)
+parm:           bt_coex_active:enable wifi/bt co-exist (default: enable) (bool)
+parm:           led_mode:0=system default, 1=On(RF On)/Off(RF Off), 2=blinking, 3=Off (default: 0) (int)
+parm:           power_save:enable WiFi power management (default: disable) (bool)
+parm:           power_level:default power save level (range from 1 - 5, default: 1) (int)
+parm:           disable_11ac:Disable VHT capabilities (default: false) (bool)
+parm:           remove_when_gone:Remove dev from PCIe bus if it is deemed inaccessible (default: false) (bool)
+parm:           disable_11ax:Disable HE capabilities (default: false) (bool)
+parm:           disable_11be:Disable EHT capabilities (default: false) (bool)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Well hey, what’s this &lt;code&gt;bt_coex_active:enable wifi/bt co-exist&lt;/code&gt; business? Some web searching led me
+to &lt;a href=&quot;https://superuser.com/a/1118989&quot;&gt;this very old SuperUser answer&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The 2.4 GHz Wifi band and bluetooth spectrums have a great deal of overlap and can conflict with
+each other&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So apparently you can configure your driver to not allow Bluetooth and 2.4 GHz WiFi to be activated
+simultaneously, which can be important because their operating frequencies overlap.&lt;/p&gt;
+&lt;p&gt;I don’t use (or like) Bluetooth anyway, so instead of messing with my driver, I just decided to turn
+Bluetooth off permanently.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemctl disable --now bluetooth
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Problem solved.&lt;/p&gt;
+</description>
+      <pubDate>Thu, 22 Jun 2023 21:20:42 GMT</pubDate>
+      <dc:creator>Phil Crockett</dc:creator>
+      <guid>https://philcrockett.com/notes/2023/06/22/wifi-trouble-disable-bluetooth/</guid>
+    </item>
+    <item>
+      <title>SSH: Security Liability?</title>
+      <link>https://philcrockett.com/notes/2023/01/22/ssh-security-liability/</link>
+      <description>&lt;p&gt;SSH is pretty handy. As a hobbyist who actually &lt;em&gt;enjoys&lt;/em&gt; managing a few Linux boxes, I
+use it all the time. However I can’t shake the feeling that it’s a significant security
+liability for a server administrator, despite the fact that the first S in SSH stands
+for “secure.”&lt;/p&gt;
+&lt;p&gt;It has too much in common with projects like &lt;a href=&quot;https://latacora.micro.blog/2019/07/16/the-pgp-problem.html&quot;&gt;PGP / GPG&lt;/a&gt; and OpenVPN, which:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;were designed a &lt;em&gt;long&lt;/em&gt; time ago&lt;/li&gt;
+&lt;li&gt;have huge C / C++ codebases&lt;/li&gt;
+&lt;li&gt;are difficult to understand, configure, and use correctly&lt;/li&gt;
+&lt;li&gt;make it really difficult to &lt;a href=&quot;https://blog.codinghorror.com/falling-into-the-pit-of-success/&quot;&gt;fall into the pit of success&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After all, if you need &lt;a href=&quot;https://github.com/jtesta/ssh-audit&quot;&gt;configuration auditing software&lt;/a&gt; and a myriad of
+“hardening” guides on the Internet, then it just might be too complex.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2023/01/22/ssh-security-liability/#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h2 id=&quot;learning-from-wireguard&quot; tabindex=&quot;-1&quot;&gt;Learning From WireGuard&lt;/h2&gt;
+&lt;p&gt;I’m not aware of any widely-used alternatives that are secure. But if the &lt;a href=&quot;https://www.wireguard.com/&quot;&gt;WireGuard&lt;/a&gt;
+developers ever come up with something, it’ll probably be exactly what I’m looking for.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;WireGuard has been designed with ease-of-implementation and simplicity in mind. It
+is meant to be easily implemented in very few lines of code, and easily auditable for
+security vulnerabilities.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A great example of this is how WireGuard approaches versioning, which is exactly the
+opposite of PGP, OpenVPN, and SSH:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;WireGuard restricts the options for implementing cryptographic controls, limits the
+choices for key exchange processes, and maps algorithms to a small subset of modern
+cryptographic primitives. If a flaw is found in any of the primitives, a new version
+can be released that resolves the issue.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/WireGuard&quot;&gt;From Wikipedia&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;h2 id=&quot;what-i-do&quot; tabindex=&quot;-1&quot;&gt;What I Do&lt;/h2&gt;
+&lt;p&gt;I don’t bother with SSH configuration on my servers anymore. Instead, I rely on
+&lt;a href=&quot;https://tailscale.com/&quot;&gt;Tailscale&lt;/a&gt; (which uses WireGuard) to connect to my servers. My firewall only allows
+SSH access via the Tailscale interface. At this point I could &lt;em&gt;almost&lt;/em&gt; discard SSH
+entirely and use &lt;a href=&quot;https://en.wikipedia.org/wiki/Telnet&quot;&gt;Telnet&lt;/a&gt; instead (though I don’t).&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2023/01/22/ssh-security-liability/#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Of course I have the luxury of being a self-hosted hobbyist, so I don’t have a very
+complex threat model, and this works well for me. I doubt if the same strategy would be
+feasible for someone who needed to &lt;a href=&quot;https://goteleport.com/blog/how-uber-netflix-facebook-do-ssh/&quot;&gt;manage a bunch of servers at scale&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;comments%3F&quot; tabindex=&quot;-1&quot;&gt;Comments?&lt;/h2&gt;
+&lt;p&gt;If you have a &lt;a href=&quot;https://joinmastodon.org/&quot;&gt;Mastodon&lt;/a&gt; account, you can reply to &lt;a href=&quot;https://fosstodon.org/@pcrock/109732805093391136&quot;&gt;my post on the Fediverse&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;footnotes&quot;&gt;Footnotes&lt;/h2&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Though to be fair, you could make &lt;em&gt;exactly&lt;/em&gt; the same arguments about the Linux
+kernel or any Linux distribution. I’m not 100% sure why I give the operating
+system a pass, while being skeptical of SSH 🤔. &lt;a href=&quot;https://philcrockett.com/notes/2023/01/22/ssh-security-liability/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Splitting things into separate independent pieces (VPN + Telnet) would be a step
+backward. See &lt;a href=&quot;https://www.leviathansecurity.com/blog/tunnelvision&quot;&gt;TunnelVision&lt;/a&gt; for an example of how this can go wrong. It would
+be really cool if someone built an &lt;em&gt;&lt;strong&gt;integrated&lt;/strong&gt;&lt;/em&gt; SSH-like remote control mechanism
+where the transport was basically WireGuard. &lt;a href=&quot;https://philcrockett.com/notes/2023/01/22/ssh-security-liability/#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+      <pubDate>Sun, 22 Jan 2023 12:30:33 GMT</pubDate>
+      <dc:creator>Phil Crockett</dc:creator>
+      <guid>https://philcrockett.com/notes/2023/01/22/ssh-security-liability/</guid>
+    </item>
+    <item>
+      <title>Trying OCaml</title>
+      <link>https://philcrockett.com/notes/2022/12/27/trying-ocaml/</link>
+      <description>&lt;p&gt;I used my &lt;a href=&quot;https://philcrockett.com/notes/2022/12/17/dream-programming-language/&quot;&gt;list of requirements for a “dream” programming language&lt;/a&gt;
+to create a spreadsheet. I use that spreadsheet to calculate a score for each language
+based on how well it fits my list of requirements.&lt;/p&gt;
+&lt;p&gt;Two languages so far score the highest:&lt;/p&gt;
+&lt;h2 id=&quot;gleam&quot; tabindex=&quot;-1&quot;&gt;Gleam&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://gleam.run/&quot;&gt;Gleam&lt;/a&gt; is &lt;em&gt;so close&lt;/em&gt; to what I’m looking for. It only misses one
+mark: native executables&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2022/12/27/trying-ocaml/#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;. Gleam runs on the Erlang VM or compiles to JavaScript,
+which is a showstopper for the kind of little hobby command line programs I want to
+write. However if I ever decide to create a service that can be deployed to a server,
+I’ll be super excited to try out Gleam.&lt;/p&gt;
+&lt;h2 id=&quot;ocaml&quot; tabindex=&quot;-1&quot;&gt;OCaml&lt;/h2&gt;
+&lt;p&gt;The next best contender I could find for the kind of software I want to write is
+&lt;a href=&quot;https://ocaml.org/&quot;&gt;OCaml&lt;/a&gt;. I must say, I have never enjoyed writing / over-engineering
+&lt;a href=&quot;https://github.com/pcrockett/hello-ocaml/&quot;&gt;a hello world program&lt;/a&gt; so much. The language
+does sadly use exceptions for error handling, though thankfully exceptions are no longer
+considered idiomatic.&lt;/p&gt;
+&lt;p&gt;I’m going to continue playing with it. We’ll see where this goes.&lt;/p&gt;
+&lt;h2 id=&quot;comments%3F&quot; tabindex=&quot;-1&quot;&gt;Comments?&lt;/h2&gt;
+&lt;p&gt;If you have a &lt;a href=&quot;https://joinmastodon.org/&quot;&gt;Mastodon&lt;/a&gt; account, you can reply to &lt;a href=&quot;https://fosstodon.org/@pcrock/109587202658507764&quot;&gt;my post on the Fediverse&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;footnotes&quot;&gt;Footnotes&lt;/h2&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Well, Gleam also misses the &lt;em&gt;object capabilities&lt;/em&gt; requirement, but almost all
+other languages miss that feature as well. As of this writing, the few languages
+that have object capabilities are in the experimental stage. &lt;a href=&quot;https://philcrockett.com/notes/2022/12/27/trying-ocaml/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+      <pubDate>Tue, 27 Dec 2022 19:44:34 GMT</pubDate>
+      <dc:creator>Phil Crockett</dc:creator>
+      <guid>https://philcrockett.com/notes/2022/12/27/trying-ocaml/</guid>
+    </item>
+    <item>
+      <title>My Dream Programming Language</title>
+      <link>https://philcrockett.com/notes/2022/12/17/dream-programming-language/</link>
+      <description>&lt;p&gt;I’m on the hunt for a fun programming language that I can pick up and mess with in my free time. I
+have a few fairly normal requirements that a lot of people ask for, plus a few less common
+requirements. I don’t think this programming language exists as of 2022. If it does, do me a solid
+and &lt;a href=&quot;https://philcrockett.com/contact/&quot;&gt;let me know&lt;/a&gt;!&lt;/p&gt;
+&lt;h2 id=&quot;the-usual-requirements&quot; tabindex=&quot;-1&quot;&gt;The Usual Requirements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Functional programming paradigm (primarily)&lt;/li&gt;
+&lt;li&gt;Compiles to native, dependency-free executable
+&lt;ul&gt;
+&lt;li&gt;I could compromise on this if it were a small scripting language&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Robust type system&lt;/li&gt;
+&lt;li&gt;Intuitive / enjoyable syntax&lt;/li&gt;
+&lt;li&gt;Reasonable learning curve
+&lt;ul&gt;
+&lt;li&gt;While I like Rust, I’m looking for something &lt;a href=&quot;https://mdwdotla.medium.com/using-rust-at-a-startup-a-cautionary-tale-42ab823d9454&quot;&gt;with lower standards&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;… but with &lt;a href=&quot;https://fasterthanli.me/articles/i-want-off-mr-golangs-wild-ride#simple-is-a-lie&quot;&gt;higher standards than Go&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Reasonably efficient performance-wise&lt;/li&gt;
+&lt;li&gt;Open source&lt;/li&gt;
+&lt;li&gt;Runs well on Linux (cross-platform a bonus)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;the-unusual-requirements&quot; tabindex=&quot;-1&quot;&gt;The Unusual Requirements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Uses &lt;a href=&quot;https://tutorial.ponylang.io/reference-capabilities/index.html&quot;&gt;object capabilities&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;no more static / global APIs for file, network, and other resources&lt;/li&gt;
+&lt;li&gt;encourages &lt;a href=&quot;https://en.wikipedia.org/wiki/Dependency_injection&quot;&gt;dependency injection&lt;/a&gt; instead&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/result/&quot;&gt;Result types&lt;/a&gt; instead of exceptions&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/option/&quot;&gt;Option types&lt;/a&gt; instead of nulls&lt;/li&gt;
+&lt;li&gt;Robust &lt;a href=&quot;https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html&quot;&gt;pattern matching&lt;/a&gt; (important for the above two points)&lt;/li&gt;
+&lt;li&gt;Doesn’t require a heavyweight IDE or excessively complex “new project” structure&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;comments%3F&quot; tabindex=&quot;-1&quot;&gt;Comments?&lt;/h2&gt;
+&lt;p&gt;If you have a &lt;a href=&quot;https://joinmastodon.org/&quot;&gt;Mastodon&lt;/a&gt; account, you can reply to &lt;a href=&quot;https://fosstodon.org/@pcrock/109528890000674779&quot;&gt;my post on the Fediverse&lt;/a&gt;.&lt;/p&gt;
+</description>
+      <pubDate>Sat, 17 Dec 2022 01:00:00 GMT</pubDate>
+      <dc:creator>Phil Crockett</dc:creator>
+      <guid>https://philcrockett.com/notes/2022/12/17/dream-programming-language/</guid>
+    </item>
+    <item>
+      <title>What is this?</title>
+      <link>https://philcrockett.com/notes/2022/11/07/</link>
+      <description>&lt;p&gt;This is the beginning of my collection of notes.&lt;/p&gt;
+&lt;p&gt;No, this is not a blog. I’ve tried maintaining a blog before, and always had trouble
+keeping up with it or finding things to write. Instead, I hope to keep this all very
+small and informal. It’s just a place to quickly dump my thoughts.&lt;/p&gt;
+&lt;!-- lint disable maximum-line-length --&gt;
+&lt;p&gt;Sure, I’ll use this to &lt;a href=&quot;https://jvns.ca/blog/2021/05/24/blog-about-what-you-ve-struggled-with/&quot;&gt;write about what I’ve struggled with&lt;/a&gt;,
+or maybe I’ll turn it into a sort of &lt;a href=&quot;https://en.wikipedia.org/wiki/Zettelkasten&quot;&gt;Zettelkasten&lt;/a&gt;.
+In any case, I &lt;strong&gt;do not&lt;/strong&gt; guarantee that these pages will stay around long-term or
+remain immutable. I will edit or prune them whenever I feel like it.&lt;/p&gt;
+&lt;!-- lint enable maximum-line-length --&gt;
+</description>
+      <pubDate>Mon, 07 Nov 2022 01:00:00 GMT</pubDate>
+      <dc:creator>Phil Crockett</dc:creator>
+      <guid>https://philcrockett.com/notes/2022/11/07/</guid>
+    </item>
+  </channel>
+</rss>
