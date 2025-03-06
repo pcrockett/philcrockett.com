@@ -1,6 +1,7 @@
 const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
 const markdownItFootnote = require('markdown-it-footnote');
+const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
 
 function trimAngleBrackets(url) {
     let begin = 0
@@ -78,10 +79,29 @@ module.exports = function(eleventyConfig) {
     mdConfig = markdownPlugins.reduce((config, configFn) => configFn(config), mdConfig);
     eleventyConfig.setLibrary("md", mdConfig);
 
+    eleventyConfig.addPlugin(feedPlugin, {
+        type: "rss",
+        outputPath: "/feed.xml",
+        collection: {
+            name: "note",
+            limit: 0,
+        },
+        metadata: {
+            language: "en",
+            title: "Phil's Notes",
+            subtitle: "Notes from my definitely-not-a-blog",
+            base: "https://philcrockett.com/",
+            author: {
+                name: "Phil Crockett",
+                email: "contact@philcrockett.com"
+            }
+        }
+    });
+
     return {
         dir: {
             input: "src"
         },
-        templateFormats: ["html", "liquid", "md" ]
+        templateFormats: ["html", "liquid", "md", "njk" ]
     };
 };
