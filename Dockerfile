@@ -1,4 +1,4 @@
-FROM docker.io/library/debian:12-slim
+FROM docker.io/library/debian:trixie-slim
 ARG DEBIAN_FRONTEND=noninteractive
 ARG USERNAME=user
 ARG UID=1000
