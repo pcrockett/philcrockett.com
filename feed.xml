@@ -7,6 +7,40 @@
     <description>Notes from my definitely-not-a-blog</description>
     <language>en</language>
     <item>
+      <title>Google clicks on GitHub notifications for you</title>
+      <link>https://philcrockett.com/notes/2025/10/11/google-clicks-on-github-notifications/</link>
+      <description>&lt;p&gt;At work I use GitHub notifications heavily. However lately I’ve been noticing a strange
+/ annoying phenomenon: GitHub notifications randomly mark themselves as “read” without
+me looking at them. This is actually quite disruptive to my workflow, since I use the
+“read” status to determine what things haven’t yet gotten my attention.&lt;/p&gt;
+&lt;p&gt;After a long time trying to figure out what the problem was, I finally found &lt;a href=&quot;https://github.com/orgs/community/discussions/144794&quot;&gt;a GitHub
+discussion&lt;/a&gt; including people who
+experience the same issue. Apparently this has been happening for a while, but for some
+reason I haven’t been falling victim to it until now.&lt;/p&gt;
+&lt;p&gt;In short: I have notification emails set up in GitHub. Notification emails contain
+tracking pixels. Once a tracking pixel is downloaded, the notification is marked as
+read. Since Gmail&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2025/10/11/google-clicks-on-github-notifications/#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt; automatically downloads email contents like tracking pixels &lt;em&gt;upon
+reciept&lt;/em&gt; (rather than when opening the email), notifications will often be marked as
+read before I ever get the chance to see them.&lt;/p&gt;
+&lt;p&gt;This is a good example of a problem that’s hard to troubleshoot, but easy to fix. You
+have two options:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Disable email notifications at &lt;a href=&quot;https://github.com/settings/notifications&quot;&gt;https://github.com/settings/notifications&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Get an email provider that doesn’t prefetch all your email contents.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;footnotes&quot;&gt;Footnotes&lt;/h2&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;sadly, my &lt;em&gt;work&lt;/em&gt; email provider 😭 &lt;a href=&quot;https://philcrockett.com/notes/2025/10/11/google-clicks-on-github-notifications/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+      <pubDate>Sat, 11 Oct 2025 13:59:25 GMT</pubDate>
+      <dc:creator>Phil Crockett</dc:creator>
+      <guid>https://philcrockett.com/notes/2025/10/11/google-clicks-on-github-notifications/</guid>
+    </item>
+    <item>
       <title>Kudos to the Fish Devs</title>
       <link>https://philcrockett.com/notes/2025/03/04/fish-kudos/</link>
       <description>&lt;p&gt;Just look at &lt;a href=&quot;https://github.com/fish-shell/fish-shell/releases/tag/4.0.0&quot;&gt;this monumental feat&lt;/a&gt;.&lt;/p&gt;

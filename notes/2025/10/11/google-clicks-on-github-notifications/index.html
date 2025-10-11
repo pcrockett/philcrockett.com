@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <title>Phil Crockett - About</title>
+        <title>Phil Crockett - Google clicks on GitHub notifications for you</title>
         
         <link href="/assets/style.css" rel="stylesheet">
         <link rel="apple-touch-icon" sizes="57x57" href="/favicon-57x57.png">
@@ -33,17 +33,57 @@
     <body>
         <div id="content">
     
-    <h1>About</h1>
+    <h1>Google clicks on GitHub notifications for you</h1>
     
     <section>
-        <p>I am an American living in Germany with my wife, son, and dog. I work for a company in Berlin as a
-senior software engineer, and my wife teaches English.</p>
-<p>Technology-wise, I am passionate about privacy, security,
-<a href="https://en.wikipedia.org/wiki/Free_and_open-source_software">FOSS</a>, and sustainability.
-I think a lot about the long-term consequences of the technology we use, and I spend a
-lot of time tinkering with open technologies. I’m a Linux enthusiast.</p>
-<p>As I get older, I find myself spending more time outside — backpacking, rock climbing, camping, etc.
-I’m also a fan of coffee, strategy games, history, and theology.</p>
+        
+<small><em>Originally published on 2025-10-11</em></small>
+
+
+
+<p>At work I use GitHub notifications heavily. However lately I’ve been noticing a strange
+/ annoying phenomenon: GitHub notifications randomly mark themselves as “read” without
+me looking at them. This is actually quite disruptive to my workflow, since I use the
+“read” status to determine what things haven’t yet gotten my attention.</p>
+<p>After a long time trying to figure out what the problem was, I finally found <a href="https://github.com/orgs/community/discussions/144794">a GitHub
+discussion</a> including people who
+experience the same issue. Apparently this has been happening for a while, but for some
+reason I haven’t been falling victim to it until now.</p>
+<p>In short: I have notification emails set up in GitHub. Notification emails contain
+tracking pixels. Once a tracking pixel is downloaded, the notification is marked as
+read. Since Gmail<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> automatically downloads email contents like tracking pixels <em>upon
+reciept</em> (rather than when opening the email), notifications will often be marked as
+read before I ever get the chance to see them.</p>
+<p>This is a good example of a problem that’s hard to troubleshoot, but easy to fix. You
+have two options:</p>
+<ul>
+<li>Disable email notifications at <a href="https://github.com/settings/notifications">https://github.com/settings/notifications</a>.</li>
+<li>Get an email provider that doesn’t prefetch all your email contents.</li>
+</ul>
+<h2 id="footnotes">Footnotes</h2>
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>sadly, my <em>work</em> email provider 😭 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+
+
+
+
+
+<section>
+<h2>Other Posts</h2>
+<ul>
+
+
+
+    <li>Previous: <a href="/notes/2025/03/04/fish-kudos/">Kudos to the Fish Devs</a> — 2025-03-04</li>
+
+</ul>
+</section>
+
 
     </section>
 </div>
