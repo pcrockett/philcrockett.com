@@ -7,6 +7,44 @@
     <description>Notes from my definitely-not-a-blog</description>
     <language>en</language>
     <item>
+      <title>tmpshell</title>
+      <link>https://philcrockett.com/notes/2025/10/16/tmpshell/</link>
+      <description>&lt;p&gt;I wrote a &lt;a href=&quot;https://github.com/pcrockett/lappy/blob/37f852c69ac68037011bc016d90782f2a16e827d/config/fish/functions/tmpshell.fish&quot;&gt;handy fish function&lt;/a&gt;
+for those times when you just want to go to a temporary directory, mess with some files
+and environment variables, and then clean up afterward:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# in ~/.config/fish/functions/tmpshell.fish
+function tmpshell
+  set temp_dir (mktemp --directory)
+  cd $temp_dir
+  echo &amp;quot;Run `exit` when finished&amp;quot;
+  fish
+  cd -
+  rm -rf $temp_dir
+  echo &amp;quot;Cleaned up $temp_dir&amp;quot;
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here’s what an interactive session looks like:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.config/fish/functions on  main [!]
+❯ tmpshell
+Run `exit` when finished
+direnv: unloading
+
+/tmp/tmp.rkxc5HRMOM
+❯ echo &amp;quot;foo&amp;quot; &amp;gt; foo.txt
+
+/tmp/tmp.rkxc5HRMOM
+❯ exit
+Cleaned up /tmp/tmp.rkxc5HRMOM
+
+.config/fish/functions on  main [!] took 6s
+❯
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      <pubDate>Thu, 16 Oct 2025 04:49:59 GMT</pubDate>
+      <dc:creator>Phil Crockett</dc:creator>
+      <guid>https://philcrockett.com/notes/2025/10/16/tmpshell/</guid>
+    </item>
+    <item>
       <title>Google clicks on GitHub notifications for you</title>
       <link>https://philcrockett.com/notes/2025/10/11/google-clicks-on-github-notifications/</link>
       <description>&lt;p&gt;At work I use GitHub notifications heavily. However lately I’ve been noticing a strange

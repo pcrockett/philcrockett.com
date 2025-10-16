@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <title>Phil Crockett - Google clicks on GitHub notifications for you</title>
+        <title>Phil Crockett - tmpshell</title>
         
         <link href="/assets/style.css" rel="stylesheet">
         <link rel="apple-touch-icon" sizes="57x57" href="/favicon-57x57.png">
@@ -33,40 +33,44 @@
     <body>
         <div id="content">
     
-    <h1>Google clicks on GitHub notifications for you</h1>
+    <h1>tmpshell</h1>
     
     <section>
         
-<small><em>Originally published on 2025-10-11</em></small>
+<small><em>Originally published on 2025-10-16</em></small>
 
 
 
-<p>At work I use GitHub notifications heavily. However lately I’ve been noticing a strange
-/ annoying phenomenon: GitHub notifications randomly mark themselves as “read” without
-me looking at them. This is actually quite disruptive to my workflow, since I use the
-“read” status to determine what things haven’t yet gotten my attention.</p>
-<p>After a long time trying to figure out what the problem was, I finally found <a href="https://github.com/orgs/community/discussions/144794">a GitHub
-discussion</a> including people who
-experience the same issue. Apparently this has been happening for a while, but for some
-reason I haven’t been falling victim to it until now.</p>
-<p>In short: I have notification emails set up in GitHub. Notification emails contain
-tracking pixels. Once a tracking pixel is downloaded, the notification is marked as
-read. Since Gmail<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> automatically downloads email contents like tracking pixels <em>upon
-reciept</em> (rather than when opening the email), notifications will often be marked as
-read before I ever get the chance to see them.</p>
-<p>This is a good example of a problem that’s hard to troubleshoot, but easy to fix. You
-have two options:</p>
-<ul>
-<li>Disable email notifications at <a href="https://github.com/settings/notifications">https://github.com/settings/notifications</a>.</li>
-<li>Get an email provider that doesn’t prefetch all your email contents.</li>
-</ul>
-<h2 id="footnotes">Footnotes</h2>
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p>sadly, my <em>work</em> email provider 😭 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
-</li>
-</ol>
-</section>
+<p>I wrote a <a href="https://github.com/pcrockett/lappy/blob/37f852c69ac68037011bc016d90782f2a16e827d/config/fish/functions/tmpshell.fish">handy fish function</a>
+for those times when you just want to go to a temporary directory, mess with some files
+and environment variables, and then clean up afterward:</p>
+<pre><code># in ~/.config/fish/functions/tmpshell.fish
+function tmpshell
+  set temp_dir (mktemp --directory)
+  cd $temp_dir
+  echo &quot;Run `exit` when finished&quot;
+  fish
+  cd -
+  rm -rf $temp_dir
+  echo &quot;Cleaned up $temp_dir&quot;
+end
+</code></pre>
+<p>Here’s what an interactive session looks like:</p>
+<pre><code>.config/fish/functions on  main [!]
+❯ tmpshell
+Run `exit` when finished
+direnv: unloading
+
+/tmp/tmp.rkxc5HRMOM
+❯ echo &quot;foo&quot; &gt; foo.txt
+
+/tmp/tmp.rkxc5HRMOM
+❯ exit
+Cleaned up /tmp/tmp.rkxc5HRMOM
+
+.config/fish/functions on  main [!] took 6s
+❯
+</code></pre>
 
 
 
@@ -77,11 +81,9 @@ have two options:</p>
 <h2>Other Posts</h2>
 <ul>
 
-    <li>Next: <a href="/notes/2025/10/16/tmpshell/">tmpshell</a> — 2025-10-16</li>
 
 
-
-    <li>Previous: <a href="/notes/2025/03/04/fish-kudos/">Kudos to the Fish Devs</a> — 2025-03-04</li>
+    <li>Previous: <a href="/notes/2025/10/11/google-clicks-on-github-notifications/">Google clicks on GitHub notifications for you</a> — 2025-10-11</li>
 
 </ul>
 </section>
