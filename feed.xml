@@ -7,6 +7,84 @@
     <description>Notes from my definitely-not-a-blog</description>
     <language>en</language>
     <item>
+      <title>PIPESTATUS</title>
+      <link>https://philcrockett.com/notes/2025/10/20/pipestatus/</link>
+      <description>&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;tl;dr:&lt;/strong&gt; Bash’s &lt;code&gt;$PIPESTATUS&lt;/code&gt; allows you to inspect the exit code of every command in
+a pipeline.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;According to Bash’s manpage, &lt;code&gt;$PIPESTATUS&lt;/code&gt; is…&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;An array variable… containing a list of exit status values from the commands in
+the most-recently-executed foreground pipeline, which may consist of only a simple
+command… Bash sets PIPESTATUS after executing multi-element pipelines, timed and
+negated pipelines, simple commands, subshells created with the ( operator, the [[ and
+(( compound commands, and after error conditions that result in the shell aborting
+command execution.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So it’s almost like &lt;code&gt;$?&lt;/code&gt; on steroids. Especially useful when using the &lt;a href=&quot;https://man.archlinux.org/man/yes.1.en&quot;&gt;&lt;code&gt;yes&lt;/code&gt; command&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;set -o pipefail
+yes | some_interactive_command
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If &lt;code&gt;some_interactive_command&lt;/code&gt; closes its stdin stream while &lt;code&gt;yes&lt;/code&gt; is trying to write to
+it (which is not uncommon), &lt;code&gt;yes&lt;/code&gt; will exit with an exit code of 141. Since we ran &lt;code&gt;set -o pipefail&lt;/code&gt;, that will crash the script (even though &lt;code&gt;some_interactive_command&lt;/code&gt; may
+have exited with code 0 “success”).&lt;/p&gt;
+&lt;p&gt;Let’s modify the script a bit:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;set -o pipefail
+yes | some_interactive_command || {
+  echo &amp;quot;Exited with code $?&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This allows the script to keep running, but… sadly it reports the exit code of &lt;code&gt;yes&lt;/code&gt;,
+rather than &lt;code&gt;some_interactive_command&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Exited with code 141&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;That’s almost never what you want. Nobody cares about &lt;code&gt;yes&lt;/code&gt;. We only care about the
+interactive command.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;set -o pipefail
+yes | some_interactive_command || {
+  echo &amp;quot;Programs in the pipeline exited with these exit codes: ${PIPESTATUS[*]}&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here we’ll see this output:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Programs in the pipeline exited with these exit codes: 141 0&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;yes&lt;/code&gt; exited with code 141&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;some_interactive_command&lt;/code&gt; exited with code 0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So taking it just one step further…&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;set -o pipefail
+yes | some_interactive_command || {
+  echo &amp;quot;Exited with code ${PIPESTATUS[1]}&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Exited with code 0&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;That’s more like it. Now we’re looking at the exit code of the command we actually care
+about. Putting it in a real-world script could look something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;set -o pipefail
+
+panic() {
+  echo &amp;quot;$*&amp;quot; &amp;gt;&amp;amp;2
+  exit 1
+}
+
+yes | some_interactive_command || {
+  result=${PIPESTATUS[1]}
+  test ${result} -eq 0 || panic &amp;quot;some_interactive_command exited with code ${result}&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      <pubDate>Mon, 20 Oct 2025 18:27:54 GMT</pubDate>
+      <dc:creator>Phil Crockett</dc:creator>
+      <guid>https://philcrockett.com/notes/2025/10/20/pipestatus/</guid>
+    </item>
+    <item>
       <title>tmpshell</title>
       <link>https://philcrockett.com/notes/2025/10/16/tmpshell/</link>
       <description>&lt;p&gt;I wrote a &lt;a href=&quot;https://github.com/pcrockett/lappy/blob/37f852c69ac68037011bc016d90782f2a16e827d/config/fish/functions/tmpshell.fish&quot;&gt;handy fish function&lt;/a&gt;
@@ -40,7 +118,7 @@ Cleaned up /tmp/tmp.rkxc5HRMOM
 ❯
 &lt;/code&gt;&lt;/pre&gt;
 </description>
-      <pubDate>Thu, 16 Oct 2025 04:49:59 GMT</pubDate>
+      <pubDate>Thu, 16 Oct 2025 06:49:59 GMT</pubDate>
       <dc:creator>Phil Crockett</dc:creator>
       <guid>https://philcrockett.com/notes/2025/10/16/tmpshell/</guid>
     </item>
@@ -74,7 +152,7 @@ have two options:&lt;/p&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
 </description>
-      <pubDate>Sat, 11 Oct 2025 13:59:25 GMT</pubDate>
+      <pubDate>Sat, 11 Oct 2025 15:59:25 GMT</pubDate>
       <dc:creator>Phil Crockett</dc:creator>
       <guid>https://philcrockett.com/notes/2025/10/11/google-clicks-on-github-notifications/</guid>
     </item>
@@ -107,7 +185,7 @@ started wanting to “own my words,” so I decided to duplicate the post here. 
 &lt;/ol&gt;
 &lt;/section&gt;
 </description>
-      <pubDate>Tue, 04 Mar 2025 20:28:01 GMT</pubDate>
+      <pubDate>Tue, 04 Mar 2025 21:28:01 GMT</pubDate>
       <dc:creator>Phil Crockett</dc:creator>
       <guid>https://philcrockett.com/notes/2025/03/04/fish-kudos/</guid>
     </item>
@@ -138,7 +216,7 @@ machine with:&lt;/p&gt;
 &lt;h2 id=&quot;comments%3F&quot; tabindex=&quot;-1&quot;&gt;Comments?&lt;/h2&gt;
 &lt;p&gt;If you have a &lt;a href=&quot;https://joinmastodon.org/&quot;&gt;Mastodon&lt;/a&gt; account, you can reply to &lt;a href=&quot;https://fosstodon.org/@pcrock/114058031613011373&quot;&gt;my post on the Fediverse&lt;/a&gt;.&lt;/p&gt;
 </description>
-      <pubDate>Sun, 23 Feb 2025 18:32:10 GMT</pubDate>
+      <pubDate>Sun, 23 Feb 2025 19:32:10 GMT</pubDate>
       <dc:creator>Phil Crockett</dc:creator>
       <guid>https://philcrockett.com/notes/2025/02/23/tiny-tools-fztotp/</guid>
     </item>
@@ -232,7 +310,7 @@ speak. &lt;a href=&quot;https://philcrockett.com/notes/2025/02/01/fosdem-noob-ti
 &lt;/ol&gt;
 &lt;/section&gt;
 </description>
-      <pubDate>Mon, 03 Feb 2025 09:00:00 GMT</pubDate>
+      <pubDate>Mon, 03 Feb 2025 10:00:00 GMT</pubDate>
       <dc:creator>Phil Crockett</dc:creator>
       <guid>https://philcrockett.com/notes/2025/02/01/fosdem-noob-tips/</guid>
     </item>
@@ -278,7 +356,7 @@ TUIs.&lt;/p&gt;
 &lt;h2 id=&quot;comments%3F&quot; tabindex=&quot;-1&quot;&gt;Comments?&lt;/h2&gt;
 &lt;p&gt;If you have a &lt;a href=&quot;https://joinmastodon.org/&quot;&gt;Mastodon&lt;/a&gt; account, you can reply to &lt;a href=&quot;https://fosstodon.org/deck/@pcrock/112698356732753269&quot;&gt;my post on the Fediverse&lt;/a&gt;.&lt;/p&gt;
 </description>
-      <pubDate>Sat, 29 Jun 2024 05:09:20 GMT</pubDate>
+      <pubDate>Sat, 29 Jun 2024 07:09:20 GMT</pubDate>
       <dc:creator>Phil Crockett</dc:creator>
       <guid>https://philcrockett.com/notes/2024/06/29/tiny-tools/</guid>
     </item>
@@ -331,7 +409,7 @@ Bluetooth off permanently.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Problem solved.&lt;/p&gt;
 </description>
-      <pubDate>Thu, 22 Jun 2023 19:20:42 GMT</pubDate>
+      <pubDate>Thu, 22 Jun 2023 21:20:42 GMT</pubDate>
       <dc:creator>Phil Crockett</dc:creator>
       <guid>https://philcrockett.com/notes/2023/06/22/wifi-trouble-disable-bluetooth/</guid>
     </item>
@@ -393,7 +471,7 @@ where the transport was basically WireGuard. &lt;a href=&quot;https://philcrocke
 &lt;/ol&gt;
 &lt;/section&gt;
 </description>
-      <pubDate>Sun, 22 Jan 2023 11:30:33 GMT</pubDate>
+      <pubDate>Sun, 22 Jan 2023 12:30:33 GMT</pubDate>
       <dc:creator>Phil Crockett</dc:creator>
       <guid>https://philcrockett.com/notes/2023/01/22/ssh-security-liability/</guid>
     </item>
@@ -429,7 +507,7 @@ that have object capabilities are in the experimental stage. &lt;a href=&quot;ht
 &lt;/ol&gt;
 &lt;/section&gt;
 </description>
-      <pubDate>Tue, 27 Dec 2022 18:44:34 GMT</pubDate>
+      <pubDate>Tue, 27 Dec 2022 19:44:34 GMT</pubDate>
       <dc:creator>Phil Crockett</dc:creator>
       <guid>https://philcrockett.com/notes/2022/12/27/trying-ocaml/</guid>
     </item>
@@ -476,7 +554,7 @@ and &lt;a href=&quot;https://philcrockett.com/contact/&quot;&gt;let me know&lt;/
 &lt;h2 id=&quot;comments%3F&quot; tabindex=&quot;-1&quot;&gt;Comments?&lt;/h2&gt;
 &lt;p&gt;If you have a &lt;a href=&quot;https://joinmastodon.org/&quot;&gt;Mastodon&lt;/a&gt; account, you can reply to &lt;a href=&quot;https://fosstodon.org/@pcrock/109528890000674779&quot;&gt;my post on the Fediverse&lt;/a&gt;.&lt;/p&gt;
 </description>
-      <pubDate>Sat, 17 Dec 2022 00:00:00 GMT</pubDate>
+      <pubDate>Sat, 17 Dec 2022 01:00:00 GMT</pubDate>
       <dc:creator>Phil Crockett</dc:creator>
       <guid>https://philcrockett.com/notes/2022/12/17/dream-programming-language/</guid>
     </item>
@@ -494,7 +572,7 @@ In any case, I &lt;strong&gt;do not&lt;/strong&gt; guarantee that these pages wi
 remain immutable. I will edit or prune them whenever I feel like it.&lt;/p&gt;
 &lt;!-- lint enable maximum-line-length --&gt;
 </description>
-      <pubDate>Mon, 07 Nov 2022 00:00:00 GMT</pubDate>
+      <pubDate>Mon, 07 Nov 2022 01:00:00 GMT</pubDate>
       <dc:creator>Phil Crockett</dc:creator>
       <guid>https://philcrockett.com/notes/2022/11/07/</guid>
     </item>

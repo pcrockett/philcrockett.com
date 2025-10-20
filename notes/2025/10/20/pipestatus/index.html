@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Phil Crockett - PIPESTATUS</title>
+        
+        <link href="/assets/style.css" rel="stylesheet">
+        <link rel="apple-touch-icon" sizes="57x57" href="/favicon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/favicon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/favicon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/favicon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/favicon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/favicon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/favicon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/favicon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/favicon-144x144.png">
+        <meta name="msapplication-config" content="/browserconfig.xml">
+        <link rel="me" href="https://fosstodon.org/@pcrock">
+        <meta name="generator" content="Eleventy v3.1.2">
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml">
+    </head>
+    <body>
+        <div id="content">
+    
+    <h1>PIPESTATUS</h1>
+    
+    <section>
+        
+<small><em>Originally published on 2025-10-20</em></small>
+
+
+
+<hr>
+<p><strong>tl;dr:</strong> Bash’s <code>$PIPESTATUS</code> allows you to inspect the exit code of every command in
+a pipeline.</p>
+<hr>
+<p>According to Bash’s manpage, <code>$PIPESTATUS</code> is…</p>
+<blockquote>
+<p>An array variable… containing a list of exit status values from the commands in
+the most-recently-executed foreground pipeline, which may consist of only a simple
+command… Bash sets PIPESTATUS after executing multi-element pipelines, timed and
+negated pipelines, simple commands, subshells created with the ( operator, the [[ and
+(( compound commands, and after error conditions that result in the shell aborting
+command execution.</p>
+</blockquote>
+<p>So it’s almost like <code>$?</code> on steroids. Especially useful when using the <a href="https://man.archlinux.org/man/yes.1.en"><code>yes</code> command</a>.</p>
+<p>For example:</p>
+<pre><code class="language-bash">set -o pipefail
+yes | some_interactive_command
+</code></pre>
+<p>If <code>some_interactive_command</code> closes its stdin stream while <code>yes</code> is trying to write to
+it (which is not uncommon), <code>yes</code> will exit with an exit code of 141. Since we ran <code>set -o pipefail</code>, that will crash the script (even though <code>some_interactive_command</code> may
+have exited with code 0 “success”).</p>
+<p>Let’s modify the script a bit:</p>
+<pre><code class="language-bash">set -o pipefail
+yes | some_interactive_command || {
+  echo &quot;Exited with code $?&quot;
+}
+</code></pre>
+<p>This allows the script to keep running, but… sadly it reports the exit code of <code>yes</code>,
+rather than <code>some_interactive_command</code>.</p>
+<blockquote>
+<p>Exited with code 141</p>
+</blockquote>
+<p>That’s almost never what you want. Nobody cares about <code>yes</code>. We only care about the
+interactive command.</p>
+<pre><code class="language-bash">set -o pipefail
+yes | some_interactive_command || {
+  echo &quot;Programs in the pipeline exited with these exit codes: ${PIPESTATUS[*]}&quot;
+}
+</code></pre>
+<p>Here we’ll see this output:</p>
+<blockquote>
+<p>Programs in the pipeline exited with these exit codes: 141 0</p>
+</blockquote>
+<ul>
+<li><code>yes</code> exited with code 141</li>
+<li><code>some_interactive_command</code> exited with code 0</li>
+</ul>
+<p>So taking it just one step further…</p>
+<pre><code class="language-bash">set -o pipefail
+yes | some_interactive_command || {
+  echo &quot;Exited with code ${PIPESTATUS[1]}&quot;
+}
+</code></pre>
+<blockquote>
+<p>Exited with code 0</p>
+</blockquote>
+<p>That’s more like it. Now we’re looking at the exit code of the command we actually care
+about. Putting it in a real-world script could look something like this:</p>
+<pre><code class="language-bash">set -o pipefail
+
+panic() {
+  echo &quot;$*&quot; &gt;&amp;2
+  exit 1
+}
+
+yes | some_interactive_command || {
+  result=${PIPESTATUS[1]}
+  test ${result} -eq 0 || panic &quot;some_interactive_command exited with code ${result}&quot;
+}
+</code></pre>
+
+
+
+
+
+
+<section>
+<h2>Other Posts</h2>
+<ul>
+
+
+
+    <li>Previous: <a href="/notes/2025/10/16/tmpshell/">tmpshell</a> — 2025-10-16</li>
+
+</ul>
+</section>
+
+
+    </section>
+</div>
+<footer class="stay-above-header">
+    <p>
+        Content updated 2025 by <a href="/">Phil Crockett</a> &#183;
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a><br>
+    </p>
+</footer>
+<header id="site-header">
+    <nav>
+        
+        <a href="/">Home</a>
+        
+        <a href="/about/">About</a>
+        
+        <a href="/notes/">Notes</a>
+        
+        <a href="/contact/">Contact</a>
+        
+    </nav>
+</header>
+
+    </body>
+</html>
