@@ -42,8 +42,8 @@
 
 
 <hr>
-<p><strong>tl;dr:</strong> Bash’s <code>$PIPESTATUS</code> allows you to inspect the exit code of every command in
-a pipeline.</p>
+<p><strong>tl;dr:</strong> Bash’s <code>$PIPESTATUS</code> allows you to inspect the exit status of every command
+in a pipeline.</p>
 <hr>
 <p>According to Bash’s manpage, <code>$PIPESTATUS</code> is…</p>
 <blockquote>
@@ -54,51 +54,53 @@ negated pipelines, simple commands, subshells created with the ( operator, the [
 (( compound commands, and after error conditions that result in the shell aborting
 command execution.</p>
 </blockquote>
-<p>So it’s almost like <code>$?</code> on steroids. Especially useful when using the <a href="https://man.archlinux.org/man/yes.1.en"><code>yes</code> command</a>.</p>
+<p>So it’s almost like <code>$?</code><sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> on steroids. Especially useful when using the <code>yes</code>
+command<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> with interactive commands.</p>
 <p>For example:</p>
 <pre><code class="language-bash">set -o pipefail
 yes | some_interactive_command
 </code></pre>
 <p>If <code>some_interactive_command</code> closes its stdin stream while <code>yes</code> is trying to write to
-it (which is not uncommon), <code>yes</code> will exit with an exit code of 141. Since we ran <code>set -o pipefail</code>, that will crash the script (even though <code>some_interactive_command</code> may
-have exited with code 0 “success”).</p>
+it (which is not uncommon), <code>yes</code> will exit with an exit status of 141. Since we ran
+<code>set -o pipefail</code>, that will crash the script (even though <code>some_interactive_command</code>
+may have exited with status 0 “success”).</p>
 <p>Let’s modify the script a bit:</p>
 <pre><code class="language-bash">set -o pipefail
 yes | some_interactive_command || {
-  echo &quot;Exited with code $?&quot;
+  echo &quot;Exited with status $?&quot;
 }
 </code></pre>
-<p>This allows the script to keep running, but… sadly it reports the exit code of <code>yes</code>,
-rather than <code>some_interactive_command</code>.</p>
+<p>This allows the script to keep running, but… sadly it reports the exit status of
+<code>yes</code>, rather than <code>some_interactive_command</code>.</p>
 <blockquote>
-<p>Exited with code 141</p>
+<p>Exited with status 141</p>
 </blockquote>
 <p>That’s almost never what you want. Nobody cares about <code>yes</code>. We only care about the
 interactive command.</p>
 <pre><code class="language-bash">set -o pipefail
 yes | some_interactive_command || {
-  echo &quot;Programs in the pipeline exited with these exit codes: ${PIPESTATUS[*]}&quot;
+  echo &quot;Programs in the pipeline exited with these exit statuses: ${PIPESTATUS[*]}&quot;
 }
 </code></pre>
 <p>Here we’ll see this output:</p>
 <blockquote>
-<p>Programs in the pipeline exited with these exit codes: 141 0</p>
+<p>Programs in the pipeline exited with these exit statuses: 141 0</p>
 </blockquote>
 <ul>
-<li><code>yes</code> exited with code 141</li>
-<li><code>some_interactive_command</code> exited with code 0</li>
+<li><code>yes</code> exited with status 141</li>
+<li><code>some_interactive_command</code> exited with status 0</li>
 </ul>
 <p>So taking it just one step further…</p>
 <pre><code class="language-bash">set -o pipefail
 yes | some_interactive_command || {
-  echo &quot;Exited with code ${PIPESTATUS[1]}&quot;
+  echo &quot;Exited with status ${PIPESTATUS[1]}&quot;
 }
 </code></pre>
 <blockquote>
-<p>Exited with code 0</p>
+<p>Exited with status 0</p>
 </blockquote>
-<p>That’s more like it. Now we’re looking at the exit code of the command we actually care
-about. Putting it in a real-world script could look something like this:</p>
+<p>That’s more like it. Now we’re looking at the exit status of the command we actually
+care about. Putting it in a real-world script could look something like this:</p>
 <pre><code class="language-bash">set -o pipefail
 
 panic() {
@@ -108,9 +110,21 @@ panic() {
 
 yes | some_interactive_command || {
   result=${PIPESTATUS[1]}
-  test ${result} -eq 0 || panic &quot;some_interactive_command exited with code ${result}&quot;
+  test ${result} -eq 0 || panic &quot;some_interactive_command exited with status ${result}&quot;
 }
 </code></pre>
+<h2 id="footnotes">Footnotes</h2>
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><code>$?</code> expands to the exit status of the most recently used command <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p><code>yes</code> (<a href="https://man.archlinux.org/man/yes.1.en">manpage</a>) is super handy for
+answering “yes / no” prompts in interactive commands. By default it just writes <code>y</code>
+to stdout over and over, which is usually enough to get through all those prompts, and
+effectively makes an interactive command suitable for scripting. <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
 
 
 
