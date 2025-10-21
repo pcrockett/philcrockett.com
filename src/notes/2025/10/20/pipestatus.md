@@ -5,8 +5,8 @@ date: 2025-10-20T16:27:54+00:00
 
 ---
 
-**tl;dr:** Bash's `$PIPESTATUS` allows you to inspect the exit code of every command in
-a pipeline.
+**tl;dr:** Bash's `$PIPESTATUS` allows you to inspect the exit status of every command
+in a pipeline.
 
 ---
 
@@ -19,7 +19,14 @@ According to Bash's manpage, `$PIPESTATUS` is...
 > (( compound commands, and after error conditions that result in the shell aborting
 > command execution.
 
-So it's almost like `$?` on steroids. Especially useful when using the [`yes` command](https://man.archlinux.org/man/yes.1.en).
+So it's almost like `$?`[^1] on steroids. Especially useful when using the `yes`
+command[^2] with interactive commands.
+
+[^1]: `$?` expands to the exit status of the most recently used command
+[^2]: `yes` ([manpage](https://man.archlinux.org/man/yes.1.en)) is super handy for
+  answering "yes / no" prompts in interactive commands. By default it just writes `y`
+  to stdout over and over, which is usually enough to get through all those prompts, and
+  effectively makes an interactive command suitable for scripting.
 
 For example:
 
@@ -29,23 +36,23 @@ yes | some_interactive_command
 ```
 
 If `some_interactive_command` closes its stdin stream while `yes` is trying to write to
-it (which is not uncommon), `yes` will exit with an exit code of 141. Since we ran `set
--o pipefail`, that will crash the script (even though `some_interactive_command` may
-have exited with code 0 "success").
+it (which is not uncommon), `yes` will exit with an exit status of 141. Since we ran
+`set -o pipefail`, that will crash the script (even though `some_interactive_command`
+may have exited with status 0 "success").
 
 Let's modify the script a bit:
 
 ```bash
 set -o pipefail
 yes | some_interactive_command || {
-  echo "Exited with code $?"
+  echo "Exited with status $?"
 }
 ```
 
-This allows the script to keep running, but... sadly it reports the exit code of `yes`,
-rather than `some_interactive_command`.
+This allows the script to keep running, but... sadly it reports the exit status of
+`yes`, rather than `some_interactive_command`.
 
-> Exited with code 141
+> Exited with status 141
 
 That's almost never what you want. Nobody cares about `yes`. We only care about the
 interactive command.
@@ -53,30 +60,30 @@ interactive command.
 ```bash
 set -o pipefail
 yes | some_interactive_command || {
-  echo "Programs in the pipeline exited with these exit codes: ${PIPESTATUS[*]}"
+  echo "Programs in the pipeline exited with these exit statuses: ${PIPESTATUS[*]}"
 }
 ```
 
 Here we'll see this output:
 
-> Programs in the pipeline exited with these exit codes: 141 0
+> Programs in the pipeline exited with these exit statuses: 141 0
 
-* `yes` exited with code 141
-* `some_interactive_command` exited with code 0
+* `yes` exited with status 141
+* `some_interactive_command` exited with status 0
 
 So taking it just one step further...
 
 ```bash
 set -o pipefail
 yes | some_interactive_command || {
-  echo "Exited with code ${PIPESTATUS[1]}"
+  echo "Exited with status ${PIPESTATUS[1]}"
 }
 ```
 
-> Exited with code 0
+> Exited with status 0
 
-That's more like it. Now we're looking at the exit code of the command we actually care
-about. Putting it in a real-world script could look something like this:
+That's more like it. Now we're looking at the exit status of the command we actually
+care about. Putting it in a real-world script could look something like this:
 
 ```bash
 set -o pipefail
@@ -88,6 +95,6 @@ panic() {
 
 yes | some_interactive_command || {
   result=${PIPESTATUS[1]}
-  test ${result} -eq 0 || panic "some_interactive_command exited with code ${result}"
+  test ${result} -eq 0 || panic "some_interactive_command exited with status ${result}"
 }
 ```
