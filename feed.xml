@@ -7,6 +7,51 @@
     <description>Notes from my definitely-not-a-blog</description>
     <language>en</language>
     <item>
+      <title>iPhone: Two Months In</title>
+      <link>https://philcrockett.com/notes/2026/01/16/iphone-after-two-months/</link>
+      <description>&lt;p&gt;&lt;a href=&quot;https://philcrockett.com/notes/2025/11/13/iphone/&quot;&gt;I bought an iPhone two months ago.&lt;/a&gt; So far, it seems like a
+good decision.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;My phone screen time has gone down to an average of less than 1 hour per day.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2026/01/16/iphone-after-two-months/#fn1&quot; id=&quot;fnref1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;li&gt;I’m surprised at how far I can get without any App Store downloads.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2026/01/16/iphone-after-two-months/#fn2&quot; id=&quot;fnref2&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;li&gt;I have yet to activate iCloud.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2026/01/16/iphone-after-two-months/#fn3&quot; id=&quot;fnref3&quot;&gt;[3]&lt;/a&gt;&lt;/sup&gt; It (pleasantly) surprises me that Apple allows this
+to be optional.&lt;/li&gt;
+&lt;li&gt;Automation via the Shortcuts app is pretty great.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://philcrockett.com/notes/2026/01/16/iphone-after-two-months/#fn4&quot; id=&quot;fnref4&quot;&gt;[4]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I thought it would be more of a struggle to resist the pull of Apple’s ecosystem, but
+so far I haven’t had any problems keeping Apple at arm’s length despite owning one of
+their devices.&lt;/p&gt;
+&lt;h2 id=&quot;footnotes&quot;&gt;Footnotes&lt;/h2&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Of course my laptop screen time has gone &lt;em&gt;up&lt;/em&gt; significantly, but that was the
+intended effect. One of my goals was to get out of the mobile ecosystem as much as
+possible and spend more time on devices I control. &lt;a href=&quot;https://philcrockett.com/notes/2026/01/16/iphone-after-two-months/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;You can setup Fastmail with minimal effort using iOS-native mail, calendar, and
+reminders apps. iOS’s support for open standards like iCAL is surprisingly great
+out-of-the-box. I &lt;em&gt;have&lt;/em&gt; downloaded a few apps, but so far haven’t needed to buy any. &lt;a href=&quot;https://philcrockett.com/notes/2026/01/16/iphone-after-two-months/#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn3&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Backing things up encourages me to feel like my device is “safe” and can be
+relied upon, which increases dependence. The whole goal of this experiment is to avoid
+dependence on the mobile ecosystem as much as possible, so I avoid backup solutions
+like iCloud intentionally. So far the only backup I have needed is for photos and
+videos, that that is handled by &lt;a href=&quot;https://ente.io/&quot;&gt;Ente&lt;/a&gt;. &lt;a href=&quot;https://philcrockett.com/notes/2026/01/16/iphone-after-two-months/#fnref3&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn4&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Example: My phone automatically turns airplane mode on and off when I join or
+leave a Wi-Fi network. My battery likes this; staying connected to cell towers sucks
+a huge amount of battery life compared to Wi-Fi. Since Wi-Fi calling works &lt;em&gt;reliably&lt;/em&gt;
+on iOS, I now have a nearly seamless way to remain connected, while increasing battery
+longevity. &lt;a href=&quot;https://philcrockett.com/notes/2026/01/16/iphone-after-two-months/#fnref4&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+      <pubDate>Fri, 16 Jan 2026 05:26:54 GMT</pubDate>
+      <dc:creator>Phil Crockett</dc:creator>
+      <guid>https://philcrockett.com/notes/2026/01/16/iphone-after-two-months/</guid>
+    </item>
+    <item>
       <title>iPhone</title>
       <link>https://philcrockett.com/notes/2025/11/13/iphone/</link>
       <description>&lt;p&gt;&lt;strong&gt;tl;dr:&lt;/strong&gt; If you’re going for lowest total cost of ownership, iPhone will serve you
