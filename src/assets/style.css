@@ -270,6 +270,27 @@ footer {
     margin-bottom: 3.1em;
 }
 
+table {
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid #cbcbcb;
+    border-radius: 0.3em;
+}
+
+th, td {
+    text-align: left;
+    vertical-align: top;
+}
+
+td {
+    border-top: 1px solid #cbcbcb;
+}
+
+th {
+    font-family: "Fira Sans",Trebuchet MS,Helvetica,Arial,sans-serif;
+    font-size: 1.1em;
+}
+
 @media print {
     body {
         font-size: 1em;
@@ -337,10 +358,18 @@ footer {
     }
 
     code {
-        background: #4d4d4d;
+        background: #3e3e3e;
     }
 
     pre {
-        background: #4d4d4d;
+        background: #3e3e3e;
+    }
+
+    table {
+        border: 1px solid #474747;
+    }
+
+    td {
+        border-top: 1px solid #474747;
     }
 }
