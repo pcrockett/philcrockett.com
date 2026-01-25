@@ -36,6 +36,10 @@ body {
     background-color: #eaeaea;
     margin: 0;
     word-break: break-word;
+
+    /* Prevent Safari from adjusting text */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body strong {
