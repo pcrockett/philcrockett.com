@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Phil Crockett - Systemd Targets and Dependencies</title>
+        
+        <link href="/assets/style.css" rel="stylesheet">
+        <link rel="apple-touch-icon" sizes="57x57" href="/favicon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/favicon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/favicon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/favicon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/favicon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/favicon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/favicon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/favicon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/favicon-144x144.png">
+        <meta name="msapplication-config" content="/browserconfig.xml">
+        <link rel="me" href="https://fosstodon.org/@pcrock">
+        <meta name="generator" content="Eleventy v3.1.2">
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml">
+    </head>
+    <body>
+        <div id="content">
+    
+    <h1>Systemd Targets and Dependencies</h1>
+    
+    <section>
+        
+<small><em>Originally published on 2026-01-25</em></small>
+
+
+
+<hr>
+<p><strong>tl;dr:</strong> If you know the background details and just need some quick syntax reminders,
+checkout the <a href="#summary">summary at the bottom</a>.</p>
+<hr>
+<p>I modify systemd unit files maybe a couple of times per year. That’s often enough that
+it’s useful for me to understand them well, but not often enough for those details to
+stick in my brain.</p>
+<p>So I wrote this for myself or for anyone else who might be in a similar situation.
+It’s for anyone who needs a quick refresher on systemd targets, <code>Wants=</code>, <code>Requires=</code>,
+<code>WantedBy=</code>, <code>RequiredBy=</code>, <code>Before=</code>, and <code>After=</code>.</p>
+<p>Before I get into the real content, it’s useful to have an example systemd unit file
+in your head for context. I chose Tailscale (copy / pasted from my laptop running
+Archlinux):</p>
+<pre><code class="language-ini"># /usr/lib/systemd/system/tailscaled.service
+[Unit]
+# Details omitted for brevity
+Wants=network-pre.target
+After=network-pre.target NetworkManager.service systemd-resolved.service
+
+[Service]
+# Details omitted for brevity
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<h2 id="the-dependency-graph" tabindex="-1">The Dependency Graph</h2>
+<p>Systemd maintains a dependency graph of units.<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> These units can include,
+for example, generic “targets” (which describe overall system states) such as
+<code>network-online.target</code>, or specific background services like <code>tailscaled.service</code>.
+There are other kinds of systemd units, but these are the most common types we interact
+with.</p>
+<p>This dependency graph is important because as your system changes state (online vs.
+offline, starting up vs. shutting down, etc.), certain things must happen in a specific
+order. For instance, it doesn’t make sense to start the Tailscale service before your
+DNS resolver is ready.</p>
+<p>A key strength of systemd’s design is that you can precisely add entries to this graph
+without performing invasive surgery on your operating system.</p>
+<p>Most of what follows applies regardless of whether you’re working with targets,
+services, or other types of systemd <strong>units</strong> — the concepts are largely consistent
+across unit types.</p>
+<h2 id="activation-states" tabindex="-1">Activation States</h2>
+<p>When a unit is activated, it eventually reaches a final activation state: either
+“active” or “failed.” If a unit was never intended to be activated, it remains
+“inactive.”</p>
+<p>Understanding these states is important for understanding the difference between
+“wanting” and “requiring” another unit.</p>
+<h2 id="establishing-a-basic-dependency-relationship" tabindex="-1">Establishing a Basic Dependency Relationship</h2>
+<p>When writing a unit file, the most basic way to establish a dependency on another unit
+is using <code>Wants=</code> and <code>Requires=</code>.</p>
+<ul>
+<li><code>Wants=</code> creates a soft dependency. If your unit includes <code>Wants=</code>, systemd will
+attempt to start the specified unit alongside yours. If that unit fails to activate,
+it doesn’t matter — your unit will still start.</li>
+<li><code>Requires=</code> creates a hard dependency. It behaves similarly to <code>Wants=</code>, but if the
+target unit ends up in a “failed” state, your unit <strong>will not</strong> start. Or, if both
+were being started in parallel, your unit will be stopped.</li>
+</ul>
+<p>In both cases, <code>Wants=</code> and <code>Requires=</code> cause systemd to include the dependent unit in
+the same transaction. The difference lies in how failure is handled.</p>
+<h2 id="reverse-dependencies" tabindex="-1">Reverse Dependencies</h2>
+<p>The <code>WantedBy=</code> and <code>RequiredBy=</code> directives let you define a dependency <strong>from another
+unit back to yours</strong> — effectively reversing the dependency direction.</p>
+<p>These directives cause symbolic links to be created. For example, if your unit
+specifies:</p>
+<pre><code class="language-ini">WantedBy=multi-user.target
+</code></pre>
+<p>systemd creates a symlink:</p>
+<pre><code>/etc/systemd/system/multi-user.target.wants/my-service.service → /usr/lib/systemd/system/my-service.service
+</code></pre>
+<p>This ensures your unit starts during the activation of <code>multi-user.target</code>.</p>
+<h3 id="what%E2%80%99s-up-with-the-%5Binstall%5D-section%3F" tabindex="-1">What’s up with the <code>[Install]</code> section?</h3>
+<p>You may have noticed that <code>Wants=</code> and <code>Requires=</code> appear in the <code>[Unit]</code> section of a
+unit file, while <code>WantedBy=</code> and <code>RequiredBy=</code> belong in the <code>[Install]</code> section. Why?
+And what does “install” even mean here?</p>
+<p>The <code>[Install]</code> section defines what happens when you <strong>enable</strong> a unit (i.e., configure
+it to auto-start at boot). So when you run:</p>
+<pre><code class="language-bash">systemctl enable tailscaled.service
+</code></pre>
+<p>systemd reads the <code>[Install]</code> section, finds the <code>WantedBy=multi-user.target</code>, and adds
+the Tailscale service to the dependency list of the <code>multi-user.target</code> unit.</p>
+<p>This is how auto-starting works: systemd already plans to activate <code>multi-user.target</code>
+during every boot process, and since now your service is now included as a dependency,
+the service starts along with it.</p>
+<blockquote>
+<p><strong>Note:</strong> The <code>[Install]</code> section has no effect until you enable the service. Before
+enabling, the unit exists, but the dependency relationship isn’t set up.</p>
+</blockquote>
+<h2 id="why-you-need-before%3D-and-after%3D" tabindex="-1">Why You Need <code>Before=</code> and <code>After=</code></h2>
+<p><strong>Important:</strong> <code>Wants=</code>, <code>Requires=</code>, and similar directives do <strong>not</strong> control startup
+order. They ensure that certain units are started <em>together</em> in the same transaction,
+but not necessarily in any particular sequence. systemd may still start your unit in
+parallel with its dependencies.</p>
+<p>If you need your unit to start only <em>after</em> another unit has reached an active (or
+failed) state, you must explicitly use <code>After=</code>. Similarly, if your unit must start
+<em>before</em> another, use <code>Before=</code>.</p>
+<p>Also note: <code>Before=</code> and <code>After=</code> do <strong>not</strong> imply a dependency. If systemd wasn’t
+already planning to start the referenced unit, these directives have no effect. They
+only matter when the other unit is part of the current activation transaction.</p>
+<p>That’s why <code>Wants=</code> or <code>Requires=</code> are often paired with <code>After=</code>. In most real-world
+cases, you need both:</p>
+<ul>
+<li>A <strong>dependency</strong> (to pull the other unit into the current transaction),</li>
+<li>And an <strong>ordering constraint</strong> (to control when it starts during the transaction).</li>
+</ul>
+<h2 id="the-tailscale-example" tabindex="-1">The Tailscale Example</h2>
+<p>In the Tailscale example, you see this:</p>
+<pre><code class="language-ini">[Unit]
+Wants=network-pre.target
+After=network-pre.target NetworkManager.service systemd-resolved.service
+</code></pre>
+<p>Here’s what this configuration does:</p>
+<ul>
+<li><code>Wants=network-pre.target</code>: Tailscale will start alongside <code>network-pre.target</code>. If,
+for some reason, you manually start <code>tailscaled.service</code> and <code>network-pre.target</code>
+hasn’t been activated yet, systemd will try to activate it (and its dependencies)
+as well.
+<ul>
+<li>If <code>network-pre.target</code> fails, that’s acceptable — Tailscale still starts, because
+it’s a soft dependency.</li>
+</ul>
+</li>
+<li><code>After=...</code>: Ensures Tailscale starts only <em>after</em> <code>network-pre.target</code>,
+<code>NetworkManager.service</code>, and <code>systemd-resolved.service</code> have reached a final state
+(either “active” or “failed”).</li>
+</ul>
+<p>Notice that <code>NetworkManager.service</code> and <code>systemd-resolved.service</code> are not
+listed in <code>Wants=</code>. That’s because Tailscale doesn’t want to <em>depend</em> on them —
+Tailscale can move mountains to <a href="https://tailscale.com/blog/sisyphean-dns-client-linux">handle all kinds of Linux DNS and networking configurations</a>.
+The unit file only ensures the Tailscale service starts after those services, <strong>if</strong>
+they are part of the current activation sequence.</p>
+<p>You’ll also see this:</p>
+<pre><code class="language-ini">[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>This means that when <code>multi-user.target</code> is activated (e.g., at boot), systemd will
+also start <code>tailscaled.service</code> — but only if you’ve previously run <code>systemctl enable tailscaled.service</code>.</p>
+<h2 id="summary" tabindex="-1">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Directive</th>
+<th>Section</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Wants=</code></td>
+<td><code>[Unit]</code></td>
+<td>Soft dependency: start together, ignore failure</td>
+</tr>
+<tr>
+<td><code>Requires=</code></td>
+<td><code>[Unit]</code></td>
+<td>Hard dependency: start together, fail if dependency fails</td>
+</tr>
+<tr>
+<td><code>Before=</code></td>
+<td><code>[Unit]</code></td>
+<td>Start this unit before the listed ones</td>
+</tr>
+<tr>
+<td><code>After=</code></td>
+<td><code>[Unit]</code></td>
+<td>Start this unit after the listed ones</td>
+</tr>
+<tr>
+<td><code>WantedBy=</code></td>
+<td><code>[Install]</code></td>
+<td>Enable auto-start by adding to another unit’s wants</td>
+</tr>
+<tr>
+<td><code>RequiredBy=</code></td>
+<td><code>[Install]</code></td>
+<td>Same, but with hard dependency</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rules of thumb</strong>:</p>
+<p>For most cases…</p>
+<ul>
+<li>Use <code>Wants=</code> + <code>After=</code> together when you want a service to start after another
+service or target.</li>
+<li>Add <code>WantedBy=multi-user.target</code> in the <code>[Install]</code> section for services that you want
+to auto-start on boot.</li>
+</ul>
+<h2 id="footnotes">Footnotes</h2>
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Tools like <code>systemd-analyze</code> and <code>systemctl list-dependencies</code> let you inspect
+various parts of the dependency graph. On a typical desktop Linux system, the full
+dependency graph is <em>huge</em>. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+
+
+
+
+
+<section>
+<h2>Other Posts</h2>
+<ul>
+
+
+
+    <li>Previous: <a href="/notes/2026/01/16/iphone-after-two-months/">iPhone: Two Months In</a> — 2026-01-16</li>
+
+</ul>
+</section>
+
+
+    </section>
+</div>
+<footer class="stay-above-header">
+    <p>
+        Content updated 2026 by <a href="/">Phil Crockett</a> &#183;
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a><br>
+    </p>
+</footer>
+<header id="site-header">
+    <nav>
+        
+        <a href="/">Home</a>
+        
+        <a href="/about/">About</a>
+        
+        <a href="/notes/">Notes</a>
+        
+        <a href="/contact/">Contact</a>
+        
+    </nav>
+</header>
+
+    </body>
+</html>
