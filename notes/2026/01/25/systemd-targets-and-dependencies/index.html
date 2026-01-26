@@ -122,8 +122,8 @@ it to auto-start at boot). So when you run:</p>
 <p>systemd reads the <code>[Install]</code> section, finds the <code>WantedBy=multi-user.target</code>, and adds
 the Tailscale service to the dependency list of the <code>multi-user.target</code> unit.</p>
 <p>This is how auto-starting works: systemd already plans to activate <code>multi-user.target</code>
-during every boot process, and since now your service is now included as a dependency,
-the service starts along with it.</p>
+during every boot process, and since Tailscale is now included as a dependency, the
+service starts along with it.</p>
 <blockquote>
 <p><strong>Note:</strong> The <code>[Install]</code> section has no effect until you enable the service. Before
 enabling, the unit exists, but the dependency relationship isn’t set up.</p>
