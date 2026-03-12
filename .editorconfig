@@ -7,23 +7,15 @@ charset = utf-8
 end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
-
-[*.{rst,ini}]
-indent_style = space
-indent_size = 4
-
-[*.{yml,html,xml,xsl,json,md}]
 indent_style = space
 indent_size = 2
 
-[*.{css,less}]
-indent_style = space
+# shfmt options:
+switch_case_indent = true
+binary_next_line = true
+
+[{.py,Justfile,justfile}]
 indent_size = 4
 
-[*.{js,sh,bats}]
-indent_style = space
-indent_size = 4
-
-[{Makefile, makefile, GNUmakefile}]
+[{Makefile,Caddyfile}]
 indent_style = tab
-indent_size = 8
