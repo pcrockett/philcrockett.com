@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# curl-pipe-to-bash! if you don't want to install the rush CLI, but you DO want some of the packages
-# in my rush-repo at <https://github.com/pcrockett/rush-repo>:
+# curl-pipe-to-bash! if you don't want to install the rush CLI, but you DO want some of
+# the packages in my rush-repo at <https://github.com/pcrockett/rush-repo>:
 #
 #     curl -SsfL http://philcrockett.com/yolo/v1.sh \
 #         | bash -s -- <PACKAGE_NAMES...>
 #
-# this is basically the same thing as running `rush snatch ...`, but it supports multiple packages
-# and doesn't require rush to be installed.
+# this is basically the same thing as running `rush snatch ...`, but it supports
+# multiple packages and doesn't require rush to be installed.
 #
 # especially handy for Dockerfiles.
 #
-# you don't need to use MY rush-repo. you can use another one by specifying the RUSH_REPO_OWNER env
-# variable before running the script.
+# you don't need to use MY rush-repo. you can use another one by specifying the
+# RUSH_REPO_OWNER env variable before running the script.
 
 RUSH_REPO_OWNER=${RUSH_REPO_OWNER:-"pcrockett"}
 ARGS=("${@}")
@@ -45,7 +45,8 @@ curl_download() {
 }
 
 install_rush() {
-    curl_download https://raw.githubusercontent.com/DannyBen/rush-cli/master/rush > bin/rush.tmp
+    curl_download https://github.com/DannyBen/rush/releases/download/v0.7.20/rush \
+        > bin/rush.tmp
     chmod +x bin/rush.tmp
     mv bin/rush.tmp bin/rush
 }
