@@ -14,7 +14,7 @@ serve: deps
 .PHONY: serve
 
 lint: deps
-	pre-commit run --all-files
+	pre-commit run --all-files --color always
 	./node_modules/.bin/remark . --frail --quiet
 .PHONY: lint
 
