@@ -39,6 +39,8 @@ repos:
         language: system
         types:
           - shell
+        # don't format old yolo scripts, just new ones
+        exclude: 'src/_files/yolo/v1.sh$|src/_files/yolo/v2.sh$'
       - id: yamllint
         name: lint yaml files
         entry: yamllint
