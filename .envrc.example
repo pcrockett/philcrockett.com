@@ -1,8 +1,5 @@
 # shellcheck shell=bash
 strict_env
 
-use asdf
-
 export EDITOR=hx
 PATH_add bin
-

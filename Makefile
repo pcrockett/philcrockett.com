@@ -42,8 +42,8 @@ worktree: clean
 deps: node_modules/.bin/eleventy
 .PHONY: deps
 
-node_modules/.bin/eleventy: package.json package-lock.json
-	npm ci --prefer-offline
+node_modules/.bin/eleventy: package.json pnpm-lock.yaml
+	pnpm ci
 
 devenv-ci: devenv-build
 	docker run --rm \

@@ -1,6 +1,5 @@
 FROM docker.io/library/debian:trixie-slim
 ARG DEBIAN_FRONTEND=noninteractive
-ARG USERNAME=user
 ARG UID=1000
 ARG GID=1000
 ARG HOME="/home/user"
@@ -11,22 +10,23 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
     --mount=target=/var/cache/apt,type=cache,sharing=locked \
 rm -f /etc/apt/apt.conf.d/docker-clean && \
 apt-get update && \
-apt-get install --yes --no-install-recommends curl ca-certificates git make && \
-groupadd --gid "${GID}" "${USERNAME}" && \
-useradd --create-home --uid "${UID}" --gid "${GID}" "${USERNAME}" && \
-mkdir /app && \
-chown -R "${USERNAME}:${USERNAME}" /app
+apt-get install --yes --no-install-recommends curl ca-certificates git make extrepo libatomic1 && \
+extrepo enable mise && \
+apt-get update && \
+apt-get install --yes --no-install-recommends mise && \
+groupadd --gid "${GID}" user && \
+useradd --create-home --uid "${UID}" --gid "${GID}" user
 
-USER ${USERNAME}
 WORKDIR /app
-COPY .tool-versions .
+COPY mise.toml mise.lock ./
+RUN chown -R user:user /app
 
-ENV HOME="${HOME}"
-ENV ASDF_DIR="${HOME}/.asdf"
-ENV PATH="${HOME}/.local/bin:${ASDF_DIR}/shims:${PATH}"
+USER user
 
+RUN mise trust && mise install
+
+ENV PATH="/home/user/.local/share/pnpm/bin:${PATH}"
 RUN \
-curl -SsfL https://philcrockett.com/yolo/v1.sh \
-    | bash -s -- asdf && \
-asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-RUN asdf install
+mise exec -- pnpm config set store-dir ~/.local/share/pnpm/store/v11 --global
+
+ENTRYPOINT [ "mise", "exec", "--" ]
