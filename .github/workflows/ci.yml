@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ "**" ]
+    branches: ["**"]
     types:
       - opened
       - synchronize
@@ -19,25 +19,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
-      with:
-        persist-credentials: false
-        fetch-depth: 0
-    - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
-      with:
-        path: ~/.cache/pre-commit
-        key: pre-commit-hooks|${{ hashFiles('.pre-commit-config.yaml') }}
-    - uses: jdx/mise-action@7e36c90d9ab29c415a2384db3006f3ec8a8cc654  # v4.2.4
-    - run: make ci
-    - name: Output website content diff to logs
-      run: cd _site && git diff
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-hooks|${{ hashFiles('.pre-commit-config.yaml') }}
+      - uses: jdx/mise-action@7e36c90d9ab29c415a2384db3006f3ec8a8cc654  # v4.2.4
+      - run: make ci
+      - name: Output website content diff to logs
+        run: cd _site && git diff
 
-    # it's ok if we push content to master without changing gh-pages.
-    # however if this is just a dependency update, let's do a check
-    # to make sure the dependency didn't change any website output.
-    #
-    # thanks <https://stackoverflow.com/a/59588725/138757>
-    - name: Ensure site contents haven't changed
-      if: contains(github.event.pull_request.labels.*.name, 'dependencies')
-      run: cd _site && ../bin/dirty-check
+      # it's ok if we push content to master without changing gh-pages.
+      # however if this is just a dependency update, let's do a check
+      # to make sure the dependency didn't change any website output.
+      #
+      # thanks <https://stackoverflow.com/a/59588725/138757>
+      - name: Ensure site contents haven't changed
+        if: contains(github.event.pull_request.labels.*.name, 'dependencies')
+        run: cd _site && ../bin/dirty-check
