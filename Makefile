@@ -42,7 +42,7 @@ worktree: clean
 deps: node_modules/.bin/eleventy
 .PHONY: deps
 
-node_modules/.bin/eleventy: package.json package-lock.json
+node_modules/.bin/eleventy: package.json pnpm-lock.yaml
 	pnpm ci
 
 devenv-ci: devenv-build
