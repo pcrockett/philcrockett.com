@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://json.schemastore.org/pre-commit-config.json
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    hooks:
+      # https://github.com/pre-commit/pre-commit-hooks?tab=readme-ov-file#hooks-available
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  # local tools assumed to be installed with mise, see mise.toml
+  - repo: local
+    hooks:
+      - id: actionlint
+        name: lint github actions files
+        language: system
+        entry: actionlint
+        types:
+          - yaml
+        files: ^\.github/workflows/
+      - id: shellcheck
+        name: lint shell scripts
+        entry: shellcheck
+        language: system
+        types:
+          - shell
+      - id: shfmt
+        name: autoformat shell scripts
+        entry: shfmt
+        args:
+          - --write
+        language: system
+        types:
+          - shell
+      - id: yamllint
+        name: lint yaml files
+        entry: yamllint
+        language: system
+        types:
+          - yaml
+      - id: yamlfmt
+        name: autoformat yaml files
+        entry: yamlfmt
+        language: system
+        types:
+          - yaml
