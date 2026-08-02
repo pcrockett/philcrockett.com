@@ -10,17 +10,12 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
     --mount=target=/var/cache/apt,type=cache,sharing=locked \
 rm -f /etc/apt/apt.conf.d/docker-clean && \
 apt-get update && \
-apt-get install --yes --no-install-recommends curl ca-certificates git make extrepo && \
+apt-get install --yes --no-install-recommends curl ca-certificates git make extrepo libatomic1 && \
 extrepo enable mise && \
 apt-get update && \
 apt-get install --yes --no-install-recommends mise && \
 groupadd --gid "${GID}" user && \
 useradd --create-home --uid "${UID}" --gid "${GID}" user
-
-RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
-    --mount=target=/var/cache/apt,type=cache,sharing=locked \
-apt-get update && \
-apt-get install --yes --no-install-recommends libatomic1
 
 WORKDIR /app
 COPY mise.toml mise.lock ./
