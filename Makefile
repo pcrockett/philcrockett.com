@@ -31,7 +31,7 @@ clean:
 publish: worktree
 	./bin/dirty-check
 	rm -r _site/*
-	make devenv-ci
+	make ci
 	cd _site && git add --all && git commit -m "Publish to gh-pages"
 	@echo "Use \`git push --all\` to publish!"
 .PHONY: publish
